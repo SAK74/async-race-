@@ -10,7 +10,9 @@ export const RootLayout = () => {
           <NavLink to={'/winners'}>Winners</NavLink>
         </nav>
       </Header>
-      <Outlet />
+      <div className="flex-grow w-full p-4">
+        <Outlet />
+      </div>
     </>
   );
 };
