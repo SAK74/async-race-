@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-export const Pagination: FC<{ page?: number; pages?: number }> = ({ page = 1, pages }) => {
+const Pagination: FC<{ page?: number; pages?: number }> = function ({ page, pages }) {
   return (
     <div>
       Pagination:
@@ -9,3 +9,7 @@ export const Pagination: FC<{ page?: number; pages?: number }> = ({ page = 1, pa
     </div>
   );
 };
+
+Pagination.defaultProps = { page: 1, pages: undefined };
+
+export default Pagination;

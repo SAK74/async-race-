@@ -15,5 +15,8 @@ module.exports = defineConfig({
   plugins: ['react'],
   rules: {
     'react/react-in-jsx-scope': 'off',
+    'react/function-component-definition': ['error', { namedComponents: 'function-expression' }],
+    'import/no-cycle': 'off',
+    'import/extensions': 'off',
   },
 });

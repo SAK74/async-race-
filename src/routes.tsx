@@ -1,10 +1,8 @@
 import { RouteObject } from 'react-router-dom';
-import { RootLayout } from './components/RootLayout';
-import { Garage } from './pages/Garage';
-import { Winners } from './pages/Winners';
-import { ErrorPage } from './pages/ErrorPage';
+import { RootLayout } from './components';
+import { Garage, Winners, ErrorPage } from './pages';
 
-export const routes: RouteObject[] = [
+const routes: RouteObject[] = [
   {
     path: '/',
     element: <RootLayout />,
@@ -22,3 +20,5 @@ export const routes: RouteObject[] = [
     ],
   },
 ];
+
+export default routes;

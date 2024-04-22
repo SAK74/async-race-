@@ -1,8 +1,8 @@
-import CarIcon from '@/assets/car.svg?react';
 import { FC } from 'react';
-import { CarControll } from './CarControll';
+import CarIcon from '@/assets/car.svg?react';
+import { CarControll } from '.';
 
-export const CarLine: FC<{ color: string; id: number; name: string }> = ({ id, name, color }) => {
+const CarLine: FC<{ color: string; id: number; name: string }> = function ({ id, name, color }) {
   return (
     <div className="relative mt-8 flex items-center">
       <CarIcon fill={color} className="absolute w-28 bottom-4 left-16" />
@@ -19,3 +19,5 @@ export const CarLine: FC<{ color: string; id: number; name: string }> = ({ id, n
     </div>
   );
 };
+
+export default CarLine;

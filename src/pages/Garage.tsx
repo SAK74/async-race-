@@ -1,8 +1,7 @@
-import { Pagination } from '@/components/Pagination';
-import { GarageControll } from '@/components/garage/GarageControll';
-import { GarageContainer } from '@/components/garage/GarageContainer';
+import { Pagination } from '@/components';
+import { GarageControll, GarageContainer } from '@/components/garage';
 
-export const Garage = () => {
+const Garage = function () {
   return (
     <main className="flex flex-col gap-4">
       <div>Garage</div>
@@ -12,3 +11,5 @@ export const Garage = () => {
     </main>
   );
 };
+
+export default Garage;

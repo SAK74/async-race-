@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-export const CarInput: FC<{ type: 'create' | 'update' }> = ({ type }) => {
+const CarInput: FC<{ type: 'create' | 'update' }> = function ({ type }) {
   return (
     <form className="flex items-center gap-1">
       <input type="text" name="car-name" className="text-neutral-800" />
@@ -9,3 +9,5 @@ export const CarInput: FC<{ type: 'create' | 'update' }> = ({ type }) => {
     </form>
   );
 };
+
+export default CarInput;

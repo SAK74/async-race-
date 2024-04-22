@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren } from 'react';
 
-export const Header: FC<PropsWithChildren> = ({ children }) => {
+const Header: FC<PropsWithChildren> = function ({ children }) {
   return (
     <header className="w-full flex justify-between">
       {children}
@@ -8,3 +8,5 @@ export const Header: FC<PropsWithChildren> = ({ children }) => {
     </header>
   );
 };
+
+export default Header;

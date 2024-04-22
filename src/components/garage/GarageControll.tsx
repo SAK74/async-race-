@@ -1,13 +1,15 @@
-import { CarInput } from './CarInput';
+import { CarInput } from '.';
 
-export const GarageControll = () => {
+const GarageControll = function () {
   return (
     <div className="flex justify-around">
-      <button>Race</button>
-      <button>Reset</button>
+      <button type="button">Race</button>
+      <button type="button">Reset</button>
       <CarInput type="create" />
       <CarInput type="update" />
-      <button>Generate cars</button>
+      <button type="button">Generate cars</button>
     </div>
   );
 };
+
+export default GarageControll;
