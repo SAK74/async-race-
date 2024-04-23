@@ -5,7 +5,7 @@ const Pagination: FC<{ page?: number; pages?: number }> = function ({ page, page
     <div>
       Pagination:
       <span>page: {page}</span>
-      <span>pages: {pages}</span>
+      <span>pages: {pages || '?'}</span>
     </div>
   );
 };
