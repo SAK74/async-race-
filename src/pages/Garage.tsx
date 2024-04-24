@@ -4,8 +4,8 @@ import { GarageControll, GarageContainer } from '@/components/garage';
 import { useGetCarsByPageQuery, useTypedSelector } from '@/store';
 
 const Garage = function () {
-  const { data } = useGetCarsByPageQuery({ page: 1 });
   const { page } = useTypedSelector((state) => state.garage);
+  const { data } = useGetCarsByPageQuery({ page });
   const pages = data && Math.ceil(data.count / CARS_PER_PAGE);
   return (
     <main className="flex flex-col gap-4">

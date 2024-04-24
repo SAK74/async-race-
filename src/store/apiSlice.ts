@@ -21,16 +21,23 @@ const carApi = createApi({
             async responseHandler(response) {
               const body = await response.json();
               const count = response.headers.get('X-Total-Count');
-              // console.log({ count });
               return { count: Number(count), data: body };
             },
             params: { _limit: CARS_PER_PAGE, _page: arg.page },
           };
         },
-        providesTags: (_, __, arg) =>
-          // console.log({ result, error, arguments });
-          [{ type: 'cars' as const, id: arg.page }],
+        providesTags: (_, __, arg) => [{ type: 'cars' as const, id: arg.page }],
       }),
+      createCar:build.mutation<any,Omit<Car,'id'>>({
+        query(arg) {
+          return {
+            url:'/garage',
+            method:'POST',
+            body:arg
+          }
+        },
+        invalidatesTags:['cars']
+      })
     };
   },
 });

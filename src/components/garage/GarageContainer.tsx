@@ -8,7 +8,7 @@ import { useGetCarsByPageQuery } from '@/store';
 //   .map((_, i) => ({ id: i + 1, name: faker.vehicle.vehicle(), color: faker.vehicle.color() }));
 
 const GarageContainer = function () {
-  const { data, isLoading, isFetching } = useGetCarsByPageQuery({ page: 1 });
+  const { data, isLoading, isFetching } = useGetCarsByPageQuery({ page: 1 }, {});
   // console.log({ data });
 
   return (

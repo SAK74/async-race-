@@ -5,8 +5,8 @@ const GarageControll = function () {
     <div className="flex justify-around">
       <button type="button">Race</button>
       <button type="button">Reset</button>
-      <CarInput type="create" />
-      <CarInput type="update" />
+      <CarInput type="create" onSubmit={() => {}} />
+      <CarInput type="update" onSubmit={() => {}} />
       <button type="button">Generate cars</button>
     </div>
   );
