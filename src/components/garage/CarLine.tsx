@@ -23,7 +23,7 @@ const CarLine: FC<{ color: string; id: number; name: string }> = function ({ id,
     <div className="relative mt-8 flex items-center">
       <CarIcon fill={color} className="absolute w-28 bottom-4 left-24" ref={carRef} />
       <CarControll
-        id={id}
+        car={{ id, name, color }}
         carRef={carRef.current}
         trackRef={trackRef.current}
         trackWidth={trackWidth}
