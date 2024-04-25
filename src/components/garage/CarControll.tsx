@@ -1,6 +1,7 @@
 import { GarageContext } from '@/pages/Garage';
 import { useDeleteCarMutation, useDeleteWinnerMutation } from '@/store/apiSlice';
 import { Car } from '@/types';
+import { type ConvertedColor, convert } from '@/utils/color-convertor';
 import { FC, useContext, useRef } from 'react';
 
 const CarControll: FC<{
@@ -37,7 +38,8 @@ const CarControll: FC<{
     if (!ctx?.selectCar) {
       throw Error("SelectCar Fn doesn't provide in context!");
     }
-    ctx.selectCar(car);
+    const hexColor = car.color.startsWith('#') ? car.color : convert(car.color as ConvertedColor);
+    ctx.selectCar({ ...car, color: hexColor });
   };
 
   const [deleteCar] = useDeleteCarMutation();
