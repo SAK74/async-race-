@@ -1,6 +1,8 @@
 import { CARS_PER_PAGE } from '@/_constants';
 import { Pagination } from '@/components';
+import Modal from '@/components/Modal';
 import { GarageControll, GarageContainer } from '@/components/garage';
+import Winner from '@/components/garage/Winner';
 import { addAnimation, addBlobAnimation } from '@/services/animations';
 import { startRace } from '@/services/engineApi';
 import { useGetCarsByPageQuery, useTypedSelector } from '@/store';
@@ -28,6 +30,7 @@ const Garage = function () {
   const pages = data && Math.ceil(data.count / CARS_PER_PAGE);
 
   const [selectedCar, setSelectedCar] = useState<Car | undefined>(undefined);
+  const [showWinner, setShowWinner] = useState<false | { name: string; time: number }>(false); // to change to false
 
   const carRefs = useRef<{ [id: number]: HTMLDivElement }>({});
   const renderedData = useMemo(
@@ -72,13 +75,18 @@ const Garage = function () {
       throw Error('Time of animation missing...');
     }
     const winner = data?.data.find((car) => car.id.toString() === id);
-    console.log({ winner: { ...winner, time: Math.round(currentTime as number) / 1000 } });
+    if (winner) {
+      setShowWinner({ name: winner.name, time: Math.round(currentTime as number) / 1000 });
+    }
+
+    // console.log({ winner: { ...winner, time: Math.round(currentTime as number) / 1000 } });
   };
 
   const onReset = () => {
     const cars = Object.values(carRefs.current);
-
     cars.forEach((car) => {
+      // console.log(car.lastElementChild?.getAnimations());
+
       car.lastElementChild?.getAnimations().forEach((animation) => {
         animation.cancel();
       });
@@ -90,6 +98,15 @@ const Garage = function () {
 
   return (
     <main className="flex flex-col gap-4">
+      {showWinner && (
+        <Modal
+          onClose={() => {
+            setShowWinner(false);
+          }}
+        >
+          <Winner {...showWinner} />
+        </Modal>
+      )}
       <div>Garage ({data?.count ?? '?'})</div>
       <GarageControll
         selectedCar={selectedCar}
@@ -97,6 +114,14 @@ const Garage = function () {
         onStart={onStart}
         onReset={onReset}
       />
+      {/* <button
+        className="self-start"
+        onClick={() => {
+          setShowWinner(true);
+        }}
+      >
+        Show winner
+      </button> */}
       <GarageContext.Provider value={{ selectCar: setSelectedCar }}>
         <GarageContainer cars={renderedData} />
       </GarageContext.Provider>
