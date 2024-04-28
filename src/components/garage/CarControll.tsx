@@ -15,13 +15,13 @@ const CarControll: FC<{
   const animationRef = useRef<Animation | null>(null);
 
   const onStart = async () => {
-    console.log('Start');
+    // console.log('Start');
 
-    if (!carRef.current || !ctx?.trackWidth) {
-      console.log({ trackWidth: ctx?.trackWidth, carRef: carRef.current });
+    if (!carRef.current) {
+      console.log({ carRef: carRef.current });
       return;
     }
-    animationRef.current = await addAnimation(carRef.current, id.toString(), ctx.trackWidth);
+    animationRef.current = await addAnimation(carRef.current, id.toString());
   };
 
   const onStop = async () => {

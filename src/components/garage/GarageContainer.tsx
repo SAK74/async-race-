@@ -1,5 +1,4 @@
 // import { faker } from '@faker-js/faker';
-// import { Car } from '@/types';
 import { FC, RefObject } from 'react';
 import { CarLine } from '.';
 import { useGetCarsByPageQuery, useTypedSelector } from '@/store';

@@ -9,7 +9,7 @@ export const CarElement: ForwardRefRenderFunction<HTMLDivElement, SVGProps<SVGSV
   return (
     <div ref={ref} className={className}>
       <CarIcon fill={fill} className="w-full" />
-      <BlobIcon className="absolute top-0 w-12 -right-6 -z-20 opacity-0" />
+      <BlobIcon className="absolute top-6 w-12 -right-0 -z-20 opacity-0" />
     </div>
   );
 };

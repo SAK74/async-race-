@@ -1,19 +1,19 @@
-// import { GarageContext } from '@/pages/Garage';
 import cn from '@/utils/cn';
-import { ComponentProps, ForwardRefRenderFunction, forwardRef, memo } from 'react';
+import { ComponentProps, FC, RefObject } from 'react';
+import CarIcon from './CarIcon';
 
-const Track: ForwardRefRenderFunction<HTMLDivElement, ComponentProps<'div'> & { name: string }> = (
-  { name, className },
-  ref
-) => {
+const Track: FC<
+  ComponentProps<'div'> & { name: string; color: string; carRef: RefObject<HTMLDivElement> }
+> = ({ name, className, color, carRef }) => {
   const _className = cn(
     'border-b-2 border-t-2 border-dashed relative flex-grow -z-10 -skew-x-12',
     className
   );
 
-  // const ctx = useContext(GarageContext);
   return (
-    <div className={_className} ref={ref}>
+    <div className={_className}>
+      <CarIcon fill={color} className="absolute w-28 bottom-1 skew-x-12" ref={carRef} />
+
       <span className="tracking-widest text-gray-400 ml-32 border-l-4 border-dashed pl-4">
         {name}
       </span>
@@ -22,4 +22,4 @@ const Track: ForwardRefRenderFunction<HTMLDivElement, ComponentProps<'div'> & { 
   );
 };
 
-export default memo(forwardRef(Track));
+export default Track;
