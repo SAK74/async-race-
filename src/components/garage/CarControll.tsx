@@ -1,4 +1,4 @@
-import { addAnimation } from '@/services/addAnimation';
+import { addAnimation, removeAnimation } from '@/services/animations';
 import { GarageContext } from '@/pages/Garage';
 import { useDeleteCarMutation, useDeleteWinnerMutation } from '@/store/apiSlice';
 import { Car } from '@/types';
@@ -14,21 +14,22 @@ const CarControll: FC<{
 
   const animationRef = useRef<Animation | null>(null);
 
-  const onStart = () => {
+  const onStart = async () => {
     console.log('Start');
 
     if (!carRef.current || !ctx?.trackWidth) {
       console.log({ trackWidth: ctx?.trackWidth, carRef: carRef.current });
       return;
     }
-    animationRef.current = addAnimation(carRef.current, id.toString(), ctx.trackWidth);
+    animationRef.current = await addAnimation(carRef.current, id.toString(), ctx.trackWidth);
   };
 
-  const onStop = () => {
-    if (!animationRef.current) {
+  const onStop = async () => {
+    if (!animationRef.current || !carRef.current) {
       return;
     }
-    animationRef.current.cancel();
+    animationRef.current.pause();
+    await removeAnimation(carRef.current, id);
   };
 
   const onSelect = () => {

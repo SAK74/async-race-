@@ -1,7 +1,8 @@
 import { CARS_PER_PAGE } from '@/_constants';
 import { Pagination } from '@/components';
 import { GarageControll, GarageContainer } from '@/components/garage';
-import { addAnimation } from '@/services/addAnimation';
+import { addAnimation } from '@/services/animations';
+import { startRace } from '@/services/engineApi';
 import { useGetCarsByPageQuery, useTypedSelector } from '@/store';
 import { Car } from '@/types';
 import {
@@ -68,22 +69,38 @@ const Garage = function () {
   }, [data]);
 
   const onStart = async () => {
-    // console.log('Rendered:');
-    const animations = Object.entries(carRefs.current).map(([id, carElement]) =>
-      addAnimation(carElement, id, trackWidth)
-    );
+    const cars = Object.entries(carRefs.current);
+    const animations = cars.map(([id, carElement]) => addAnimation(carElement, id, trackWidth));
+    animations.forEach(async (animPromise) => {
+      const animation = await animPromise;
+      try {
+        await startRace(Number(animation.id));
+      } catch {
+        animation.pause();
+        carRefs.current[Number(animation.id)].lastElementChild?.animate(
+          [{ opacity: 0 }, { opacity: 1, transform: 'scale(2)' }],
+          {
+            duration: 1000,
+            fill: 'forwards',
+          }
+        );
+      }
+    });
 
     console.log(animations);
-    const winner = await Promise.any(animations.map((anim) => anim?.finished));
+    const winner = await Promise.any(animations.map(async (anim) => (await anim).finished));
 
     console.log({ winner: winner.id });
   };
 
   const onReset = () => {
-    const carAnimations = Object.values(carRefs.current).map((carElem) => carElem.getAnimations());
-    console.log('Reset: ', carAnimations);
-    carAnimations.forEach((animations) => {
-      animations.forEach((animation) => {
+    const cars = Object.values(carRefs.current);
+
+    cars.forEach((car) => {
+      car.getAnimations().forEach((animation) => {
+        animation.cancel();
+      });
+      car.lastElementChild?.getAnimations().forEach((animation) => {
         animation.cancel();
       });
     });
