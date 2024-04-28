@@ -1,46 +1,52 @@
 import { useCreateCarMutation, useUpdateCarMutation } from '@/store/apiSlice';
 import { CarInput } from '.';
 import { Car } from '@/types';
-import { FC, useContext } from 'react';
-import { GarageContext } from '@/pages/Garage';
+import { Dispatch, FC, SetStateAction, useCallback } from 'react';
 import { AMOUNT_OF_CARS_GENERATING } from '@/_constants';
 import { faker } from '@faker-js/faker';
 
-const GarageControll: FC = () => {
+const GarageControll: FC<{
+  selectedCar?: Car;
+  selectCar: Dispatch<SetStateAction<Car | undefined>>;
+  onStart: () => void;
+  onReset: () => void;
+}> = ({ selectedCar, selectCar, onStart, onReset }) => {
   const [createCar] = useCreateCarMutation();
-  const onCreate = (car: Omit<Car, 'id'>) => {
+  const onCreate = useCallback((car: Omit<Car, 'id'>) => {
     createCar(car);
-  };
+  }, []);
 
   const [updateCar, { isSuccess }] = useUpdateCarMutation();
-  const ctx = useContext(GarageContext);
-  const onUpdate = (car: Omit<Car, 'id'>) => {
-    const selectedCar = ctx?.selectedCar;
+  const onUpdate = useCallback((car: Omit<Car, 'id'>) => {
     if (!selectedCar || (selectedCar.name === car.name && selectedCar.color === car.color)) {
       return;
     }
     updateCar({ ...car, id: selectedCar.id });
     if (isSuccess) {
-      ctx.selectCar(undefined);
+      selectCar(undefined);
     }
-  };
+  }, []);
 
-  const onGenerate = () => {
+  const onGenerate = useCallback(() => {
     for (let i = 0; i < AMOUNT_OF_CARS_GENERATING; i += 1) {
       createCar({ name: faker.vehicle.vehicle(), color: faker.vehicle.color() });
     }
-  };
+  }, []);
 
   return (
     <div className="flex justify-around">
-      <button type="button">Race</button>
-      <button type="button">Reset</button>
+      <button type="button" onClick={onStart}>
+        Race
+      </button>
+      <button type="button" onClick={onReset}>
+        Reset
+      </button>
       <CarInput type="create" onSubmit={onCreate} />
       <CarInput
         type="update"
         onSubmit={onUpdate}
-        name={ctx?.selectedCar?.name}
-        color={ctx?.selectedCar?.color}
+        name={selectedCar?.name}
+        color={selectedCar?.color}
       />
       <button type="button" onClick={onGenerate}>
         Generate {AMOUNT_OF_CARS_GENERATING} cars

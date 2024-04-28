@@ -1,29 +1,27 @@
+import { addAnimation } from '@/services/addAnimation';
 import { GarageContext } from '@/pages/Garage';
 import { useDeleteCarMutation, useDeleteWinnerMutation } from '@/store/apiSlice';
 import { Car } from '@/types';
 import { type ConvertedColor, convert } from '@/utils/color-convertor';
-import { FC, useContext, useRef } from 'react';
+import { FC, RefObject, useContext, useRef } from 'react';
 
 const CarControll: FC<{
   car: Car;
-  carRef: HTMLDivElement | null;
-  trackWidth?: number;
-  trackRef: HTMLDivElement | null;
-}> = function ({ car, carRef, trackWidth }) {
+  carRef: RefObject<HTMLDivElement>;
+  id: number;
+}> = ({ car, carRef, id }) => {
+  const ctx = useContext(GarageContext);
+
   const animationRef = useRef<Animation | null>(null);
 
   const onStart = () => {
-    if (!carRef || !trackWidth) {
+    console.log('Start');
+
+    if (!carRef.current || !ctx?.trackWidth) {
+      console.log({ trackWidth: ctx?.trackWidth, carRef: carRef.current });
       return;
     }
-    const carWidth = carRef.clientWidth;
-    animationRef.current = carRef.animate(
-      [{ transform: 'translateX(0)' }, { transform: `translateX(${trackWidth - carWidth}px)` }],
-      {
-        duration: 2000,
-        fill: 'forwards',
-      }
-    );
+    animationRef.current = addAnimation(carRef.current, id.toString(), ctx.trackWidth);
   };
 
   const onStop = () => {
@@ -33,7 +31,6 @@ const CarControll: FC<{
     animationRef.current.cancel();
   };
 
-  const ctx = useContext(GarageContext);
   const onSelect = () => {
     if (!ctx?.selectCar) {
       throw Error("SelectCar Fn doesn't provide in context!");

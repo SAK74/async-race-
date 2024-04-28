@@ -1,5 +1,5 @@
 import { Car } from '@/types';
-import { FC, FormEventHandler } from 'react';
+import { FC, FormEventHandler, memo } from 'react';
 
 const CarInput: FC<{
   type: 'create' | 'update';
@@ -40,4 +40,4 @@ const CarInput: FC<{
   );
 };
 
-export default CarInput;
+export default memo(CarInput);
