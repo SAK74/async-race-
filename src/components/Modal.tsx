@@ -17,11 +17,8 @@ const Modal: FC<PropsWithChildren<{ onClose: () => void }>> = ({ children, onClo
       ref={dialogRef}
       className="bg-transparent backdrop:backdrop-blur-[2px] px-8 relative animate-grow"
     >
-      <div
-        className="absolute right-2 top-0 text-red-500 text-3xl cursor-pointer"
-        onClick={onClose}
-      >
-        x
+      <div className="absolute right-2 top-0 text-3xl cursor-pointer" onClick={onClose}>
+        ❌
       </div>
       {children}
     </dialog>,

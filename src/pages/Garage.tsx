@@ -5,7 +5,8 @@ import { GarageControll, GarageContainer } from '@/components/garage';
 import Winner from '@/components/garage/Winner';
 import { addAnimation, addBlobAnimation } from '@/services/animations';
 import { startRace } from '@/services/engineApi';
-import { useGetCarsByPageQuery, useTypedSelector } from '@/store';
+import { useGetCarsByPageQuery, useTypedDispatch, useTypedSelector } from '@/store';
+import { setPage } from '@/store/garageSlice';
 import { Car } from '@/types';
 import {
   Dispatch,
@@ -47,6 +48,7 @@ const Garage = function () {
 
   useEffect(() => {
     if (data) {
+      carRefs.current = {};
       renderedData.forEach((car) => {
         if (car.carRef.current) {
           carRefs.current[car.id] = car.carRef.current;
@@ -95,6 +97,10 @@ const Garage = function () {
       });
     });
   };
+  const dispatch = useTypedDispatch();
+  const onSetPage = (page: number) => {
+    dispatch(setPage(page));
+  };
 
   return (
     <main className="flex flex-col gap-4">
@@ -114,19 +120,12 @@ const Garage = function () {
         onStart={onStart}
         onReset={onReset}
       />
-      {/* <button
-        className="self-start"
-        onClick={() => {
-          setShowWinner(true);
-        }}
-      >
-        Show winner
-      </button> */}
+
       <GarageContext.Provider value={{ selectCar: setSelectedCar }}>
         <GarageContainer cars={renderedData} />
       </GarageContext.Provider>
 
-      <Pagination page={page} pages={pages} />
+      <Pagination page={page} pages={pages} onSetPage={onSetPage} />
     </main>
   );
 };
