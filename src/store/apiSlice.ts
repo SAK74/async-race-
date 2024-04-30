@@ -1,10 +1,21 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { CARS_PER_PAGE, SERVER_URL } from '@/_constants';
-import { Car } from '@/types';
+import { Car, Order, SortType, Winner } from '@/types';
 
 type CarResponse = {
   count: number;
   data: Car[];
+};
+
+type WinnersResponse = {
+  count: number;
+  data: Winner[];
+};
+
+const responseHandler = async (response: Response) => {
+  const body = await response.json();
+  const count = response.headers.get('X-Total-Count');
+  return { count: Number(count), data: body };
 };
 
 const carApi = createApi({
@@ -18,11 +29,7 @@ const carApi = createApi({
         query(arg) {
           return {
             url: '/garage',
-            async responseHandler(response) {
-              const body = await response.json();
-              const count = response.headers.get('X-Total-Count');
-              return { count: Number(count), data: body };
-            },
+            responseHandler,
             params: { _limit: CARS_PER_PAGE, _page: arg.page },
           };
         },
@@ -56,6 +63,21 @@ const carApi = createApi({
         },
         invalidatesTags: ['winners'],
       }),
+
+      getWinnersByPage: build.query<
+        WinnersResponse,
+        { _page: number; _sort?: SortType; _order?: Order }
+      >({
+        query({ _page, _sort, _order }) {
+          return {
+            url: '/winners',
+            responseHandler,
+            params: { _limit: CARS_PER_PAGE, _page, _sort, _order },
+          };
+        },
+        providesTags: (_, __, arg) =>
+          Object.entries(arg).map(([_, value]) => ({ type: 'winners', id: value })),
+      }),
     };
   },
 });
@@ -68,4 +90,5 @@ export const {
   useUpdateCarMutation,
   useDeleteCarMutation,
   useDeleteWinnerMutation,
+  useGetWinnersByPageQuery,
 } = carApi;
