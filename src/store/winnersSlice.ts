@@ -16,3 +16,5 @@ const winnerSlice = createSlice({
 });
 
 export default winnerSlice.reducer;
+
+export const { setPage: setWinnerPage } = winnerSlice.actions;

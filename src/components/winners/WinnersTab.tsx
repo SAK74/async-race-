@@ -1,28 +1,36 @@
 import { Winner } from '@/types';
 import { FC } from 'react';
+import WinnerRow from './WinnerRow';
+import CarIcon from '@/assets/car.svg?react';
 
 const WinnersTab: FC<{ winners: Winner[] }> = ({ winners }) => {
   const caption = ['№', 'Car', 'Name', 'Wins', 'Best time (sec)'];
   return (
     <>
-      <table className="w-full  rounded-lg ">
+      <table className="w-[500px]  rounded-lg self-center">
         <thead className="border-b-2 text-cyan-300 border-gray-500">
-          <tr className="">
+          <tr className="*:text-center *:p-4">
             {caption.map((col) => (
               <td key={col}>{col}</td>
             ))}
           </tr>
         </thead>
         <tbody>
-          {winners.map(({ id, time, wins }) => (
-            <tr key={id} className="">
-              <td>{id}</td>
-              <td>-</td>
-              <td>-</td>
-              <td>{wins}</td>
-              <td>{time}</td>
-            </tr>
+          {winners.map((winner) => (
+            <WinnerRow key={winner.id} winner={winner} CarIcon={CarIcon} />
+            // <tr key={id} className="">
+            //   <td>{id}</td>
+            //   <td>-</td>
+            //   <td>-</td>
+            //   <td>{wins}</td>
+            //   <td>{time}</td>
+            // </tr>
           ))}
+          {/* <tr>
+            <td colSpan={5} className="text-center">
+              .....Loading....
+            </td>
+          </tr> */}
         </tbody>
       </table>
 

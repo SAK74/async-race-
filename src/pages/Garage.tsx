@@ -7,7 +7,7 @@ import { useAddwinner } from '@/components/garage/hooks/useAddwinner';
 import { addAnimation, addBlobAnimation } from '@/services/animations';
 import { startRace } from '@/services/engineApi';
 import { useGetCarsByPageQuery, useTypedDispatch, useTypedSelector } from '@/store';
-import { setPage } from '@/store/garageSlice';
+import { setGaragePage } from '@/store/garageSlice';
 import { Car } from '@/types';
 import {
   Dispatch,
@@ -103,7 +103,7 @@ const Garage = function () {
   };
   const dispatch = useTypedDispatch();
   const onSetPage = (page: number) => {
-    dispatch(setPage(page));
+    dispatch(setGaragePage(page));
   };
 
   return (

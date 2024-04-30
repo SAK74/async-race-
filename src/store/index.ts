@@ -19,4 +19,17 @@ export const useTypedSelector: TypedUseSelectorHook<Store> = useSelector;
 export const useTypedDispatch = () => useDispatch<typeof store.dispatch>();
 
 // export * from './garageSlice';
-export { useGetCarsByPageQuery } from './apiSlice';
+export {
+  useGetCarsByPageQuery,
+  useCreateCarMutation,
+  useCreateWinnerMutation,
+  useDeleteCarMutation,
+  useDeleteWinnerMutation,
+  useGetCarByIdQuery,
+  useGetWinnerByIdQuery,
+  useGetWinnersByPageQuery,
+  useUpdateCarMutation,
+  useUpdateWinnerMutation,
+} from './apiSlice';
+export { setGaragePage } from './garageSlice';
+export { setWinnerPage } from './winnersSlice';

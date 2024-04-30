@@ -12,4 +12,4 @@ const garageSlice = createSlice({
 });
 
 export default garageSlice.reducer;
-export const { setPage } = garageSlice.actions;
+export const { setPage: setGaragePage } = garageSlice.actions;
