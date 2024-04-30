@@ -1,6 +1,6 @@
 import { addAnimation, removeAnimation } from '@/services/animations';
 import { GarageContext } from '@/pages/Garage';
-import { useDeleteCarMutation, useDeleteWinnerMutation } from '@/store/apiSlice';
+import { useDeleteCarMutation, useDeleteWinnerMutation } from '@/store';
 import { Car } from '@/types';
 import { type ConvertedColor, convert } from '@/utils/color-convertor';
 import { FC, RefObject, useContext, useRef } from 'react';

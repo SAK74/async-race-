@@ -1,4 +1,4 @@
-import { useGetCarByIdQuery } from '@/store/apiSlice';
+import { useGetCarByIdQuery } from '@/store';
 import { type Winner } from '@/types';
 import { FC, SVGProps } from 'react';
 

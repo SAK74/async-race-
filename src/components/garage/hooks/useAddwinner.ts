@@ -1,5 +1,5 @@
 import { SERVER_URL } from '@/_constants';
-import { useCreateWinnerMutation, useUpdateWinnerMutation } from '@/store/apiSlice';
+import { useCreateWinnerMutation, useUpdateWinnerMutation } from '@/store';
 import { Winner } from '@/types';
 import axios from 'axios';
 

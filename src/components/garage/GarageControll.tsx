@@ -1,4 +1,4 @@
-import { useCreateCarMutation, useUpdateCarMutation } from '@/store/apiSlice';
+import { useCreateCarMutation, useUpdateCarMutation } from '@/store';
 import { CarInput } from '.';
 import { Car } from '@/types';
 import { Dispatch, FC, SetStateAction, useCallback } from 'react';

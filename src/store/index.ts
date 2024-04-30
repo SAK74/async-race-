@@ -18,7 +18,6 @@ export type Store = ReturnType<typeof store.getState>;
 export const useTypedSelector: TypedUseSelectorHook<Store> = useSelector;
 export const useTypedDispatch = () => useDispatch<typeof store.dispatch>();
 
-// export * from './garageSlice';
 export {
   useGetCarsByPageQuery,
   useCreateCarMutation,

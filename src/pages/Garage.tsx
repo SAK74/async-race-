@@ -6,8 +6,7 @@ import Winner from '@/components/garage/Winner';
 import { useAddwinner } from '@/components/garage/hooks/useAddwinner';
 import { addAnimation, addBlobAnimation } from '@/services/animations';
 import { startRace } from '@/services/engineApi';
-import { useGetCarsByPageQuery, useTypedDispatch, useTypedSelector } from '@/store';
-import { setGaragePage } from '@/store/garageSlice';
+import { useGetCarsByPageQuery, useTypedDispatch, useTypedSelector, setGaragePage } from '@/store';
 import { Car } from '@/types';
 import {
   Dispatch,

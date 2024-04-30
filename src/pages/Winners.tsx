@@ -2,7 +2,7 @@ import { CARS_PER_PAGE } from '@/_constants';
 import { Pagination } from '@/components';
 import WinnersTab from '@/components/winners/WinnersTab';
 import { setWinnerPage, useTypedDispatch, useTypedSelector } from '@/store';
-import { useGetWinnersByPageQuery } from '@/store/apiSlice';
+import { useGetWinnersByPageQuery } from '@/store';
 import { FC } from 'react';
 
 const Winners: FC = () => {
