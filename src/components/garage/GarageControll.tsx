@@ -1,7 +1,7 @@
 import { useCreateCarMutation, useUpdateCarMutation } from '@/store';
 import { CarInput } from '.';
-import { Car } from '@/types';
-import { Dispatch, FC, SetStateAction, useCallback } from 'react';
+import { type Car } from '@/types';
+import { useCallback, type Dispatch, type FC, type SetStateAction } from 'react';
 import { AMOUNT_OF_CARS_GENERATING } from '@/_constants';
 import { faker } from '@faker-js/faker';
 

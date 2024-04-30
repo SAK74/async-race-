@@ -1,12 +1,7 @@
-// import { faker } from '@faker-js/faker';
-import { FC, RefObject } from 'react';
+import type { FC, RefObject } from 'react';
 import { CarLine } from '.';
 import { useGetCarsByPageQuery, useTypedSelector } from '@/store';
 import { Car } from '@/types';
-
-// const fakenCars: Car[] = new Array(2)
-//   .fill('')
-//   .map((_, i) => ({ id: i + 1, name: faker.vehicle.vehicle(), color: faker.vehicle.color() }));
 
 const GarageContainer: FC<{ cars?: (Car & { carRef: RefObject<HTMLDivElement> })[] }> = ({
   cars,
@@ -14,7 +9,6 @@ const GarageContainer: FC<{ cars?: (Car & { carRef: RefObject<HTMLDivElement> })
   const { page } = useTypedSelector((state) => state.garage);
 
   const { isLoading, isFetching } = useGetCarsByPageQuery({ page }, {});
-  // console.log({ data });
 
   return (
     <div className="flex flex-col">

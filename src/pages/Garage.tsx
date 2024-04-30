@@ -7,7 +7,7 @@ import { useAddwinner } from '@/components/garage/hooks/useAddwinner';
 import { addAnimation, addBlobAnimation } from '@/services/animations';
 import { startRace } from '@/services/engineApi';
 import { useGetCarsByPageQuery, useTypedDispatch, useTypedSelector, setGaragePage } from '@/store';
-import { Car } from '@/types';
+import { type Car } from '@/types';
 import {
   Dispatch,
   SetStateAction,

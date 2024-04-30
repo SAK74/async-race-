@@ -1,5 +1,5 @@
 import { NavLink, Outlet } from 'react-router-dom';
-import { FC } from 'react';
+import { type FC } from 'react';
 import { Header } from '.';
 
 const RootLayout: FC = function () {

@@ -1,5 +1,5 @@
-import { Car } from '@/types';
-import { FC, FormEventHandler, memo } from 'react';
+import { type Car } from '@/types';
+import { type FC, type FormEventHandler, memo } from 'react';
 
 const CarInput: FC<{
   type: 'create' | 'update';

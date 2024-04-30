@@ -1,6 +1,5 @@
-import { FC, RefObject, memo } from 'react';
+import { type FC, type RefObject, memo } from 'react';
 import { CarControll } from '.';
-// import CarIcon from './CarIcon';
 import Track from './Track';
 
 const CarLine: FC<{

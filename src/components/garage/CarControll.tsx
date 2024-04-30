@@ -1,9 +1,9 @@
 import { addAnimation, removeAnimation } from '@/services/animations';
 import { GarageContext } from '@/pages/Garage';
 import { useDeleteCarMutation, useDeleteWinnerMutation } from '@/store';
-import { Car } from '@/types';
+import { type Car } from '@/types';
 import { type ConvertedColor, convert } from '@/utils/color-convertor';
-import { FC, RefObject, useContext, useRef } from 'react';
+import { type FC, type RefObject, useContext, useRef } from 'react';
 
 const CarControll: FC<{
   car: Car;

@@ -1,6 +1,6 @@
 import { SERVER_URL } from '@/_constants';
 import { useCreateWinnerMutation, useUpdateWinnerMutation } from '@/store';
-import { Winner } from '@/types';
+import { type Winner } from '@/types';
 import axios from 'axios';
 
 axios.defaults.baseURL = SERVER_URL;

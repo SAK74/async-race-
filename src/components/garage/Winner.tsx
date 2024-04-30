@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { type FC, useEffect } from 'react';
 import tadam from '@/assets/ta-dam.wav';
 
 const Winner: FC<{ name: string; time: number }> = ({ name, time }) => {

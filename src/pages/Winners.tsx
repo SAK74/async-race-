@@ -3,7 +3,7 @@ import { Pagination } from '@/components';
 import WinnersTab from '@/components/winners/WinnersTab';
 import { setWinnerPage, useTypedDispatch, useTypedSelector } from '@/store';
 import { useGetWinnersByPageQuery } from '@/store';
-import { FC } from 'react';
+import type { FC } from 'react';
 
 const Winners: FC = () => {
   const { page } = useTypedSelector((state) => state.winners);

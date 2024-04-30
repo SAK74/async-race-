@@ -1,5 +1,5 @@
 import cn from '@/utils/cn';
-import { FC } from 'react';
+import { type FC } from 'react';
 
 const Pagination: FC<{
   page: number;

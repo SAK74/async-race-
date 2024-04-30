@@ -1,6 +1,6 @@
 import { useGetCarByIdQuery } from '@/store';
 import { type Winner } from '@/types';
-import { FC, SVGProps } from 'react';
+import type { FC, SVGProps } from 'react';
 
 const WinnerRow: FC<{ winner: Winner; CarIcon: FC<SVGProps<SVGSVGElement>> }> = ({
   winner,

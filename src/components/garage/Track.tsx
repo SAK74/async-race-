@@ -1,5 +1,5 @@
 import cn from '@/utils/cn';
-import { ComponentProps, FC, RefObject } from 'react';
+import type { ComponentProps, FC, RefObject } from 'react';
 import CarIcon from './CarIcon';
 
 const Track: FC<

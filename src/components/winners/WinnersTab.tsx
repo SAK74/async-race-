@@ -1,5 +1,5 @@
-import { Winner } from '@/types';
-import { FC } from 'react';
+import { type Winner } from '@/types';
+import type { FC } from 'react';
 import WinnerRow from './WinnerRow';
 import CarIcon from '@/assets/car.svg?react';
 
