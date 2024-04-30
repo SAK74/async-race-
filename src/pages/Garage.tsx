@@ -3,6 +3,7 @@ import { Pagination } from '@/components';
 import Modal from '@/components/Modal';
 import { GarageControll, GarageContainer } from '@/components/garage';
 import Winner from '@/components/garage/Winner';
+import { useAddwinner } from '@/components/garage/hooks/useAddwinner';
 import { addAnimation, addBlobAnimation } from '@/services/animations';
 import { startRace } from '@/services/engineApi';
 import { useGetCarsByPageQuery, useTypedDispatch, useTypedSelector } from '@/store';
@@ -57,6 +58,8 @@ const Garage = function () {
     }
   }, [data]);
 
+  const addWinner = useAddwinner();
+
   const onStart = async () => {
     const cars = Object.entries(carRefs.current);
     const animations = cars.map(([id, carElement]) => addAnimation(carElement, id));
@@ -78,9 +81,10 @@ const Garage = function () {
     }
     const winner = data?.data.find((car) => car.id.toString() === id);
     if (winner) {
-      setShowWinner({ name: winner.name, time: Math.round(currentTime as number) / 1000 });
+      const time = Math.round(currentTime as number) / 1000;
+      setShowWinner({ name: winner.name, time });
+      addWinner({ id: winner.id, time });
     }
-
     // console.log({ winner: { ...winner, time: Math.round(currentTime as number) / 1000 } });
   };
 

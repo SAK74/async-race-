@@ -10,14 +10,12 @@ type RaceResponseType = {
   success: boolean;
 };
 
-// const url = new URL('/engine',SERVER_URL)
 axios.defaults.baseURL = SERVER_URL;
 
 const fetchEngine: <T>(id: number, status: 'started' | 'stopped' | 'drive') => Promise<T> = async (
   id,
   status
 ) => {
-  // const response = await fetch(url,{method:"PATCH"})
   return (
     await axios.patch('/engine', null, {
       params: { id, status },

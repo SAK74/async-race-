@@ -33,7 +33,12 @@ const carApi = createApi({
             params: { _limit: CARS_PER_PAGE, _page: arg.page },
           };
         },
-        providesTags: (_, __, arg) => [{ type: 'cars' as const, id: arg.page }],
+        providesTags: (res, __, arg) =>
+          res
+            ? res.data
+                .map((car) => ({ type: 'cars' as const, id: car.id }))
+                .concat([{ type: 'cars' as const, id: arg.page }])
+            : [{ type: 'cars' as const, id: arg.page }],
       }),
 
       createCar: build.mutation<unknown, Omit<Car, 'id'>>({
@@ -47,7 +52,7 @@ const carApi = createApi({
         query({ id, name, color }) {
           return { url: `/garage/${id}`, method: 'PUT', body: { name, color } };
         },
-        invalidatesTags: ['cars'],
+        invalidatesTags: (_, __, { id }) => [{ type: 'cars', id }],
       }),
 
       deleteCar: build.mutation<unknown, { id: number }>({
@@ -55,6 +60,11 @@ const carApi = createApi({
           return { url: `/garage/${id}`, method: 'DELETE' };
         },
         invalidatesTags: ['cars'],
+      }),
+
+      getCarById: build.query<Car, { id: Car['id'] }>({
+        query: ({ id }) => ({ url: `/garage/${id}` }),
+        providesTags: (_, __, { id }) => [{ type: 'cars', id }],
       }),
 
       deleteWinner: build.mutation<unknown, { id: number }>({
@@ -75,8 +85,46 @@ const carApi = createApi({
             params: { _limit: CARS_PER_PAGE, _page, _sort, _order },
           };
         },
-        providesTags: (_, __, arg) =>
-          Object.entries(arg).map(([_, value]) => ({ type: 'winners', id: value })),
+        providesTags: (result, __, arg) => {
+          const tagsBySort = Object.entries(arg).map(([_, value]) => ({
+            type: 'winners' as const,
+            id: value,
+          }));
+          return result
+            ? [...result.data.map(({ id }) => ({ type: 'winners' as const, id })), ...tagsBySort]
+            : tagsBySort;
+        },
+      }),
+
+      createWinner: build.mutation<Winner, Omit<Winner, 'id'>>({
+        query(arg) {
+          return {
+            url: '/winners',
+            body: arg,
+            method: 'POST',
+          };
+        },
+        invalidatesTags: ['winners'],
+      }),
+
+      getWinnerById: build.query<Winner, { id: Winner['id'] }>({
+        query({ id }) {
+          return {
+            url: `/winners/${id}`,
+          };
+        },
+        providesTags: (_, __, { id }) => [{ type: 'winners', id }],
+      }),
+
+      updateWinner: build.mutation<Winner, Winner>({
+        query({ id, time, wins }) {
+          return {
+            url: `/winners/${id}`,
+            method: 'PUT',
+            body: { time, wins },
+          };
+        },
+        invalidatesTags: (_, __, { id }) => [{ type: 'winners', id }],
       }),
     };
   },
@@ -91,4 +139,8 @@ export const {
   useDeleteCarMutation,
   useDeleteWinnerMutation,
   useGetWinnersByPageQuery,
+  useCreateWinnerMutation,
+  useGetCarByIdQuery,
+  useGetWinnerByIdQuery,
+  useUpdateWinnerMutation,
 } = carApi;
