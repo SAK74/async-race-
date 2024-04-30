@@ -14,7 +14,7 @@ export const useAddwinner = () => {
       const { id, time, wins } = (await axios.get<Winner>(`/winners/${winner.id}`)).data;
       updateWinner({ id, wins: wins + 1, time: Math.min(time, winner.time) });
     } catch {
-      createWinner({ wins: 1, time: winner.time });
+      createWinner({ wins: 1, time: winner.time, id: winner.id });
     }
   };
 };

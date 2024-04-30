@@ -31,4 +31,4 @@ export {
   useUpdateWinnerMutation,
 } from './apiSlice';
 export { setGaragePage } from './garageSlice';
-export { setWinnerPage } from './winnersSlice';
+export { setWinnerPage, setWinnersSort } from './winnersSlice';

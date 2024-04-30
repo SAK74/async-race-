@@ -84,7 +84,6 @@ const Garage = function () {
       setShowWinner({ name: winner.name, time });
       addWinner({ id: winner.id, time });
     }
-    // console.log({ winner: { ...winner, time: Math.round(currentTime as number) / 1000 } });
   };
 
   const onReset = () => {

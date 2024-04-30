@@ -6,9 +6,8 @@ import { useGetWinnersByPageQuery } from '@/store';
 import type { FC } from 'react';
 
 const Winners: FC = () => {
-  const { page } = useTypedSelector((state) => state.winners);
-  const { data } = useGetWinnersByPageQuery({ _page: page });
-  // console.log(data);
+  const { page, order, sort } = useTypedSelector((state) => state.winners);
+  const { data } = useGetWinnersByPageQuery({ _page: page, _order: order, _sort: sort });
   const dispatch = useTypedDispatch();
   const onSetPage = (page: number) => {
     dispatch(setWinnerPage(page));

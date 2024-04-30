@@ -96,7 +96,7 @@ const carApi = createApi({
         },
       }),
 
-      createWinner: build.mutation<Winner, Omit<Winner, 'id'>>({
+      createWinner: build.mutation<Winner, Winner>({
         query(arg) {
           return {
             url: '/winners',
