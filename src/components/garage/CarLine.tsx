@@ -9,7 +9,7 @@ const CarLine: FC<{
   carRef: RefObject<HTMLDivElement>;
 }> = ({ id, name, color, carRef }) => {
   return (
-    <div className="relative mt-8 flex items-center">
+    <div className="relative mt-4 mb-1 flex items-center">
       <CarControll car={{ id, name, color }} carRef={carRef} id={id} />
       <Track name={name} className="" color={color} carRef={carRef} />
     </div>

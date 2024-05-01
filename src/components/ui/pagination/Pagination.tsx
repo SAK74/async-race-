@@ -1,12 +1,11 @@
-import cn from '@/utils/cn';
 import { type FC } from 'react';
+import { Button } from '@/components/ui/button/Button';
 
 const Pagination: FC<{
-  page: number;
+  page?: number;
   pages?: number;
   onSetPage: (page: number) => void;
-  // prevPage: (page: number) => void;
-}> = ({ page, pages, onSetPage }) => {
+}> = ({ page = 1, pages, onSetPage }) => {
   const isLastPage = page === pages;
 
   const nextPage = () => {
@@ -32,21 +31,21 @@ const Pagination: FC<{
   };
   return (
     <div className="space-x-4">
-      <span onClick={firstPage} className={cn('text-2xl', { 'cursor-pointer': page !== 1 })}>
+      <Button variant="outline" disabled={page === 1} onClick={firstPage}>
         ◀◀
-      </span>
-      <span onClick={prevPage} className={cn('text-2xl', { 'cursor-pointer': page !== 1 })}>
+      </Button>
+      <Button variant="outline" disabled={page === 1} onClick={prevPage}>
         ◀
-      </span>
+      </Button>
       <span>
         page {page} of {pages || '?'}
       </span>
-      <span onClick={nextPage} className={cn('text-2xl', { 'cursor-pointer': !isLastPage })}>
+      <Button variant="outline" onClick={nextPage} disabled={isLastPage}>
         ▶
-      </span>
-      <span onClick={lastPage} className={cn('text-2xl', { 'cursor-pointer': !isLastPage })}>
+      </Button>
+      <Button variant="outline" onClick={lastPage} disabled={isLastPage}>
         ▶▶
-      </span>
+      </Button>
     </div>
   );
 };
