@@ -15,7 +15,7 @@ const Winners: FC = () => {
 
   return (
     <main className="flex flex-col">
-      <h1>Winners</h1>
+      <h1 className="text-3xl ml-8">Winners</h1>
       {data && <WinnersTab winners={data.data} />}
       <Pagination
         page={page}

@@ -5,6 +5,7 @@ export default {
     extend: {
       animation: {
         grow: 'grow 1s ease-in',
+        flash: 'flash 2s calc(0.05s * var(--i)) infinite',
       },
     },
     keyframes: {
@@ -12,6 +13,9 @@ export default {
         '0%': { transform: 'scale(0)' },
         '80%': { transform: 'scale(1.2)' },
         '100%': { transform: 'scale(1.1)' },
+      },
+      flash: {
+        '0%,95%': { opacity: 0.7, color: 'inherit' },
       },
     },
   },

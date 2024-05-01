@@ -44,7 +44,7 @@ const Garage = function () {
           <Winner {...showWinner} />
         </Modal>
       )}
-      <div>Garage ({data?.count ?? '?'})</div>
+      <h1 className="text-3xl ml-8">Garage ({data?.count ?? '?'})</h1>
       <GarageControll
         selectedCar={selectedCar}
         selectCar={setSelectedCar}

@@ -27,7 +27,7 @@ export const Button: FC<PropsWithChildren<ComponentProps<'button'> & Props>> = (
     },
     { 'hover:ring-0 pointer-events-none opacity-40': disabled },
     {
-      'bg-transparent ring-0 underline underline-offset-8 text-sky-300 text-xl focus:ring-0 hover:decoration-transparent hover:border-transparent':
+      'bg-transparent ring-0 underline underline-offset-8 text-blue-400 text-xl focus:ring-0 hover:decoration-transparent hover:border-transparent':
         variant === 'link',
     },
     { 'no-underline bg-slate-500': isActive },
