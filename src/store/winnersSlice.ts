@@ -18,16 +18,9 @@ const winnerSlice = createSlice({
       state.sort = payload;
       state.order = state.order === Order.ASC ? Order.DESC : Order.ASC;
     },
-    // setOrder: (state, { payload }: PayloadAction<Order>) => {
-    //   state.order = payload;
-    // },
   },
 });
 
 export default winnerSlice.reducer;
 
-export const {
-  setPage: setWinnerPage,
-  // setOrder: setWinnersOrder,
-  setSort: setWinnersSort,
-} = winnerSlice.actions;
+export const { setPage: setWinnerPage, setSort: setWinnersSort } = winnerSlice.actions;

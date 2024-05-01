@@ -2,14 +2,9 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { CARS_PER_PAGE, SERVER_URL } from '@/_constants';
 import { Car, Order, SortType, Winner } from '@/types';
 
-type CarResponse = {
+export type QueryResponse<T> = {
   count: number;
-  data: Car[];
-};
-
-type WinnersResponse = {
-  count: number;
-  data: Winner[];
+  data: T[];
 };
 
 const responseHandler = async (response: Response) => {
@@ -25,7 +20,7 @@ const carApi = createApi({
   tagTypes: ['cars', 'winners'],
   endpoints(build) {
     return {
-      getCarsByPage: build.query<CarResponse, { page: number }>({
+      getCarsByPage: build.query<QueryResponse<Car>, { page: number }>({
         query(arg) {
           return {
             url: '/garage',
@@ -41,14 +36,14 @@ const carApi = createApi({
             : [{ type: 'cars' as const, id: arg.page }],
       }),
 
-      createCar: build.mutation<unknown, Omit<Car, 'id'>>({
+      createCar: build.mutation<Car, Omit<Car, 'id'>>({
         query(arg) {
           return { url: '/garage', method: 'POST', body: arg };
         },
         invalidatesTags: ['cars'],
       }),
 
-      updateCar: build.mutation<unknown, Car>({
+      updateCar: build.mutation<Car, Car>({
         query({ id, name, color }) {
           return { url: `/garage/${id}`, method: 'PUT', body: { name, color } };
         },
@@ -75,7 +70,7 @@ const carApi = createApi({
       }),
 
       getWinnersByPage: build.query<
-        WinnersResponse,
+        QueryResponse<Winner>,
         { _page: number; _sort?: SortType; _order?: Order }
       >({
         query({ _page, _sort, _order }) {

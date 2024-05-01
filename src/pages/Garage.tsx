@@ -3,21 +3,10 @@ import { Pagination } from '@/components';
 import Modal from '@/components/Modal';
 import { GarageControll, GarageContainer } from '@/components/garage';
 import Winner from '@/components/garage/Winner';
-import { useAddwinner } from '@/components/garage/hooks/useAddwinner';
-import { addAnimation, addBlobAnimation } from '@/services/animations';
-import { startRace } from '@/services/engineApi';
+import { useGarageInit } from '@/components/garage/hooks/useGarageInit';
 import { useGetCarsByPageQuery, useTypedDispatch, useTypedSelector, setGaragePage } from '@/store';
 import { type Car } from '@/types';
-import {
-  Dispatch,
-  SetStateAction,
-  createContext,
-  createRef,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { Dispatch, SetStateAction, createContext, useEffect, useState } from 'react';
 
 type GarageContextType = {
   selectCar: Dispatch<SetStateAction<Car | undefined>>;
@@ -31,74 +20,14 @@ const Garage = function () {
   const pages = data && Math.ceil(data.count / CARS_PER_PAGE);
 
   const [selectedCar, setSelectedCar] = useState<Car | undefined>(undefined);
-  const [showWinner, setShowWinner] = useState<false | { name: string; time: number }>(false); // to change to false
 
-  const carRefs = useRef<{ [id: number]: HTMLDivElement }>({});
-  const renderedData = useMemo(
-    () =>
-      !data
-        ? []
-        : data.data.map((car) => {
-            // const carRef = useRef<HTMLDivElement | null>(null);
-            const carRef = createRef<HTMLDivElement>();
-            return { ...car, carRef };
-          }),
-    [data]
-  );
+  const { onMount, renderedData, showWinner, setShowWinner, onStart, onReset } =
+    useGarageInit(data);
 
   useEffect(() => {
-    if (data) {
-      carRefs.current = {};
-      renderedData.forEach((car) => {
-        if (car.carRef.current) {
-          carRefs.current[car.id] = car.carRef.current;
-        }
-      });
-    }
+    onMount();
   }, [data]);
 
-  const addWinner = useAddwinner();
-
-  const onStart = async () => {
-    const cars = Object.entries(carRefs.current);
-    const animations = cars.map(([id, carElement]) => addAnimation(carElement, id));
-    animations.forEach(async (animPromise) => {
-      const animation = await animPromise;
-      try {
-        await startRace(Number(animation.id));
-      } catch {
-        animation.pause();
-        addBlobAnimation(carRefs.current[Number(animation.id)].lastElementChild);
-      }
-    });
-
-    const { currentTime, id } = await Promise.any(
-      animations.map(async (anim) => (await anim).finished)
-    );
-    if (!currentTime) {
-      throw Error('Time of animation missing...');
-    }
-    const winner = data?.data.find((car) => car.id.toString() === id);
-    if (winner) {
-      const time = Math.round(currentTime as number) / 1000;
-      setShowWinner({ name: winner.name, time });
-      addWinner({ id: winner.id, time });
-    }
-  };
-
-  const onReset = () => {
-    const cars = Object.values(carRefs.current);
-    cars.forEach((car) => {
-      // console.log(car.lastElementChild?.getAnimations());
-
-      car.lastElementChild?.getAnimations().forEach((animation) => {
-        animation.cancel();
-      });
-      car.getAnimations().forEach((animation) => {
-        animation.cancel();
-      });
-    });
-  };
   const dispatch = useTypedDispatch();
   const onSetPage = (page: number) => {
     dispatch(setGaragePage(page));
@@ -122,11 +51,9 @@ const Garage = function () {
         onStart={onStart}
         onReset={onReset}
       />
-
       <GarageContext.Provider value={{ selectCar: setSelectedCar }}>
         <GarageContainer cars={renderedData} />
       </GarageContext.Provider>
-
       <Pagination page={page} pages={pages} onSetPage={onSetPage} />
     </main>
   );
