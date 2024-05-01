@@ -20,3 +20,4 @@ module.exports = defineConfig({
     'import/extensions': 'off',
   },
 });
+export const extends = ['plugin:storybook/recommended'];

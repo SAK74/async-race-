@@ -4,6 +4,7 @@ import { type Car } from '@/types';
 import { useCallback, type Dispatch, type FC, type SetStateAction } from 'react';
 import { AMOUNT_OF_CARS_GENERATING } from '@/_constants';
 import { faker } from '@faker-js/faker';
+import { Button } from '../ui/button/Button';
 
 const GarageControll: FC<{
   selectedCar?: Car;
@@ -35,12 +36,12 @@ const GarageControll: FC<{
 
   return (
     <div className="flex justify-around">
-      <button type="button" onClick={onStart}>
+      <Button type="button" onClick={onStart}>
         Race
-      </button>
-      <button type="button" onClick={onReset}>
+      </Button>
+      <Button type="button" onClick={onReset}>
         Reset
-      </button>
+      </Button>
       <CarInput type="create" onSubmit={onCreate} />
       <CarInput
         type="update"
@@ -48,9 +49,9 @@ const GarageControll: FC<{
         name={selectedCar?.name}
         color={selectedCar?.color}
       />
-      <button type="button" onClick={onGenerate}>
+      <Button type="button" onClick={onGenerate}>
         Generate {AMOUNT_OF_CARS_GENERATING} cars
-      </button>
+      </Button>
     </div>
   );
 };

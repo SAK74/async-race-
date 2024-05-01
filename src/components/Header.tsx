@@ -2,9 +2,9 @@ import type { FC, PropsWithChildren } from 'react';
 
 const Header: FC<PropsWithChildren> = function ({ children }) {
   return (
-    <header className="w-full flex justify-between">
+    <header className="w-full flex justify-between px-8 pt-8 pb-4">
       {children}
-      <span>Header</span>
+      <span className="uppercase text-5xl font-extrabold font-serif italic mr-6">Async race</span>
     </header>
   );
 };

@@ -4,6 +4,7 @@ import { useDeleteCarMutation, useDeleteWinnerMutation } from '@/store';
 import { type Car } from '@/types';
 import { type ConvertedColor, convert } from '@/utils/color-convertor';
 import { type FC, type RefObject, useContext, useRef } from 'react';
+import { Button } from '../ui/button/Button';
 
 const CarControll: FC<{
   car: Car;
@@ -15,10 +16,7 @@ const CarControll: FC<{
   const animationRef = useRef<Animation | null>(null);
 
   const onStart = async () => {
-    // console.log('Start');
-
     if (!carRef.current) {
-      console.log({ carRef: carRef.current });
       return;
     }
     animationRef.current = await addAnimation(carRef.current, id.toString());
@@ -47,23 +45,25 @@ const CarControll: FC<{
     deleteWinner({ id: car.id });
   };
   return (
-    <div>
-      <span className="inline-flex flex-col">
-        <button type="button" onClick={onSelect} className="text-xs p-1">
-          Select
-        </button>
-        <button type="button" className="text-xs p-1" onClick={onDelete}>
-          Remove
-        </button>
-      </span>
-      <span className="inline-flex flex-col">
-        <button type="button" className="text-xs p-1" onClick={onStart}>
-          Start
-        </button>
-        <button type="button" className="text-xs p-1" onClick={onStop}>
-          Stop
-        </button>
-      </span>
+    <div className="grid grid-cols-2 items-center gap-y-2">
+      <Button type="button" onClick={onSelect} className="text-xs p-1 row-start-1">
+        Select
+      </Button>
+      <Button type="button" className="text-xs p-1 col-start-1" onClick={onDelete}>
+        Remove
+      </Button>
+      <Button
+        type="button"
+        variant="start"
+        className="text-xs p-1 row-start-1 justify-self-center"
+        onClick={onStart}
+      />
+      <Button
+        type="button"
+        variant="stop"
+        className="text-xs p-1 justify-self-center"
+        onClick={onStop}
+      />
     </div>
   );
 };
