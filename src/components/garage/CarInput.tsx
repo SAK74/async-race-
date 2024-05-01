@@ -1,5 +1,6 @@
 import { type Car } from '@/types';
 import { type FC, type FormEventHandler, memo } from 'react';
+import { Button } from '../ui/button/Button';
 
 const CarInput: FC<{
   type: 'create' | 'update';
@@ -35,7 +36,7 @@ const CarInput: FC<{
         defaultValue={color ?? '#000000'}
         className="w-6 cursor-pointer rounded-sm"
       />
-      <button type="submit">{type === 'create' ? 'Create car' : 'Update car'}</button>
+      <Button type="submit">{type === 'create' ? 'Create car' : 'Update car'}</Button>
     </form>
   );
 };
