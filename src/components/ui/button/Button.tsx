@@ -21,7 +21,7 @@ const Button: FC<PropsWithChildren<ComponentProps<'button'> & Props>> = function
     'rounded-md bg-black text-slate-200 font-medium border border-transparent hover:border-sky-500 px-3 py-1 focus:ring-4 ring-slate-500 ring-2 transition-colors',
     { 'rounded-full p-3': isRounded },
     {
-      'bg-transparent text-2xl font-normal ring-0 focus:ring-0 hover:border-slate-500 border-2':
+      'bg-transparent text-2xl font-normal ring-0 focus:ring-0 hover:border-slate-500 border-2 p-2':
         variant === 'outline',
     },
     { 'hover:ring-0 pointer-events-none opacity-40': disabled },

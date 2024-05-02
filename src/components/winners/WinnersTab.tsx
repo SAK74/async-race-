@@ -7,7 +7,6 @@ import cn from '@/utils/cn';
 
 const WinnersTab: FC<{ winners: Winner[] }> = function ({ winners }) {
   const { sort, order } = useTypedSelector((state) => state.winners);
-  // console.log({ order });
 
   const caption = ['№', 'Car', 'Name', 'Wins', 'Best time (sec)'] as const;
   const dispatch = useTypedDispatch();

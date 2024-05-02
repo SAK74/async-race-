@@ -19,7 +19,7 @@ const Winners: FC = function () {
 
   return (
     <main className="flex flex-col">
-      <h1 className="text-3xl ml-8">Winners {data?.count ?? '?'}</h1>
+      <h1 className="text-3xl ml-8">Winners ({data?.count ?? '?'})</h1>
       {data && <WinnersTab winners={data.data} />}
       <Pagination
         page={page}

@@ -41,7 +41,7 @@ const GarageControll: FC<{
   }, [createCar]);
 
   return (
-    <div className="flex justify-around">
+    <div className="flex flex-wrap justify-around">
       <Button type="button" onClick={onStart}>
         Race
       </Button>

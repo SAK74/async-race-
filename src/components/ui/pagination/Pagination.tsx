@@ -30,7 +30,7 @@ const Pagination: FC<{
     onSetPage(1);
   };
   return (
-    <div className="space-x-4">
+    <div className="space-x-1">
       <Button variant="outline" disabled={page === 1} onClick={firstPage}>
         ◀◀
       </Button>
