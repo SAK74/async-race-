@@ -81,7 +81,7 @@ const carApi = createApi({
           };
         },
         providesTags: (result, __, arg) => {
-          const tagsBySort = Object.entries(arg).map(([_, value]) => ({
+          const tagsBySort = Object.values(arg).map((value) => ({
             type: 'winners' as const,
             id: value,
           }));

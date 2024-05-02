@@ -2,10 +2,10 @@ import { forwardRef, ForwardRefRenderFunction, SVGProps, memo } from 'react';
 import CarIcon from '@/assets/car.svg?react';
 import BlobIcon from '@/assets/blob.svg?react';
 
-export const CarElement: ForwardRefRenderFunction<HTMLDivElement, SVGProps<SVGSVGElement>> = (
-  { fill, className },
-  ref
-) => {
+export const CarElement: ForwardRefRenderFunction<
+  HTMLDivElement,
+  SVGProps<SVGSVGElement>
+> = function ({ fill, className }, ref) {
   return (
     <div ref={ref} className={className}>
       <CarIcon fill={fill} className="w-full" />

@@ -1,17 +1,17 @@
-import cn from '@/utils/cn';
 import type { ComponentProps, FC, RefObject } from 'react';
+import cn from '@/utils/cn';
 import CarIcon from './CarIcon';
 
 const Track: FC<
   ComponentProps<'div'> & { name: string; color: string; carRef: RefObject<HTMLDivElement> }
-> = ({ name, className, color, carRef }) => {
-  const _className = cn(
+> = function ({ name, className, color, carRef }) {
+  const finalClass = cn(
     'border-b-2 border-t-2 border-dashed relative flex-grow -z-10 -skew-x-12',
     className
   );
 
   return (
-    <div className={_className}>
+    <div className={finalClass}>
       <CarIcon fill={color} className="absolute w-28 bottom-1 skew-x-12" ref={carRef} />
 
       <span className="tracking-widest text-gray-400 ml-32 border-l-4 border-dashed pl-4">

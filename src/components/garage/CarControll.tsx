@@ -1,16 +1,16 @@
+import { type FC, type RefObject, useContext, useRef } from 'react';
 import { addAnimation, removeAnimation } from '@/services/animations';
 import { GarageContext } from '@/pages/Garage';
 import { useDeleteCarMutation, useDeleteWinnerMutation } from '@/store';
 import { type Car } from '@/types';
 import { type ConvertedColor, convert } from '@/utils/color-convertor';
-import { type FC, type RefObject, useContext, useRef } from 'react';
-import { Button } from '../ui/button/Button';
+import { Button } from '../ui';
 
 const CarControll: FC<{
   car: Car;
   carRef: RefObject<HTMLDivElement>;
   id: number;
-}> = ({ car, carRef, id }) => {
+}> = function ({ car, carRef, id }) {
   const ctx = useContext(GarageContext);
 
   const animationRef = useRef<Animation | null>(null);

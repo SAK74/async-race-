@@ -1,11 +1,11 @@
+import type { FC, SVGProps } from 'react';
 import { useGetCarByIdQuery } from '@/store';
 import { type Winner } from '@/types';
-import type { FC, SVGProps } from 'react';
 
-const WinnerRow: FC<{ winner: Winner; CarIcon: FC<SVGProps<SVGSVGElement>> }> = ({
+const WinnerRow: FC<{ winner: Winner; CarIcon: FC<SVGProps<SVGSVGElement>> }> = function ({
   winner,
   CarIcon,
-}) => {
+}) {
   const { data, isLoading } = useGetCarByIdQuery({ id: winner.id });
   return (
     <tr className="*:text-center *:px-4 *:py-2">
@@ -13,7 +13,7 @@ const WinnerRow: FC<{ winner: Winner; CarIcon: FC<SVGProps<SVGSVGElement>> }> = 
       {data && (
         <>
           <td>{winner.id}</td>
-          <td>
+          <td aria-label="car-icon">
             <CarIcon fill={data.color} className="w-20" />
           </td>
           <td>{data.name}</td>

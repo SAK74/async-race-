@@ -1,11 +1,11 @@
+import axios from 'axios';
 import { SERVER_URL } from '@/_constants';
 import { useCreateWinnerMutation, useUpdateWinnerMutation } from '@/store';
 import { type Winner } from '@/types';
-import axios from 'axios';
 
 axios.defaults.baseURL = SERVER_URL;
 
-export const useAddwinner = () => {
+const useAddwinner = () => {
   const [updateWinner] = useUpdateWinnerMutation();
   const [createWinner] = useCreateWinnerMutation();
 
@@ -18,3 +18,5 @@ export const useAddwinner = () => {
     }
   };
 };
+
+export default useAddwinner;

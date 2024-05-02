@@ -1,7 +1,7 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import { type FC } from 'react';
 import { Header } from '.';
-import { Button } from './ui/button/Button';
+import { Button } from './ui';
 
 const RootLayout: FC = function () {
   return (

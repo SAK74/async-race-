@@ -1,5 +1,5 @@
-import Wave from '@/utils/WaveEffect';
 import type { FC, PropsWithChildren } from 'react';
+import Wave from '@/utils/WaveEffect';
 
 const Header: FC<PropsWithChildren> = function ({ children }) {
   return (

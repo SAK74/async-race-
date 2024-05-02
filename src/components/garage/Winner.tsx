@@ -1,7 +1,7 @@
 import { type FC, useEffect } from 'react';
 import tadam from '@/assets/ta-dam.wav';
 
-const Winner: FC<{ name: string; time: number }> = ({ name, time }) => {
+const Winner: FC<{ name: string; time: number }> = function ({ name, time }) {
   useEffect(() => {
     const sound = new Audio(tadam);
     sound.volume = 0.2;

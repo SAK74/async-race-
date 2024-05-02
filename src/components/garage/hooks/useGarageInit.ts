@@ -1,11 +1,11 @@
+import { createRef, useCallback, useMemo, useRef, useState } from 'react';
 import { type QueryResponse } from '@/store/apiSlice';
 import { type Car } from '@/types';
-import { createRef, useMemo, useRef, useState } from 'react';
-import { useAddwinner } from './useAddwinner';
+import { useAddwinner } from '.';
 import { addAnimation, addBlobAnimation } from '@/services/animations';
 import { startRace } from '@/services/engineApi';
 
-export const useGarageInit = (data?: QueryResponse<Car>) => {
+const useGarageInit = (data?: QueryResponse<Car>) => {
   const carRefs = useRef<{ [id: number]: HTMLDivElement }>({});
 
   const renderedData = useMemo(
@@ -19,7 +19,7 @@ export const useGarageInit = (data?: QueryResponse<Car>) => {
     [data]
   );
 
-  const onMount = () => {
+  const onMount = useCallback(() => {
     if (data) {
       carRefs.current = {};
       renderedData.forEach((car) => {
@@ -28,7 +28,7 @@ export const useGarageInit = (data?: QueryResponse<Car>) => {
         }
       });
     }
-  };
+  }, [renderedData, data]);
 
   const [showWinner, setShowWinner] = useState<false | { name: string; time: number }>(false);
 
@@ -82,3 +82,4 @@ export const useGarageInit = (data?: QueryResponse<Car>) => {
     onStart,
   };
 };
+export default useGarageInit;

@@ -1,11 +1,11 @@
-import { Order, type Winner } from '@/types';
 import type { FC } from 'react';
+import { Order, type Winner } from '@/types';
 import WinnerRow from './WinnerRow';
 import CarIcon from '@/assets/car.svg?react';
 import { setWinnersSort, useTypedDispatch, useTypedSelector } from '@/store';
 import cn from '@/utils/cn';
 
-const WinnersTab: FC<{ winners: Winner[] }> = ({ winners }) => {
+const WinnersTab: FC<{ winners: Winner[] }> = function ({ winners }) {
   const { sort, order } = useTypedSelector((state) => state.winners);
   // console.log({ order });
 

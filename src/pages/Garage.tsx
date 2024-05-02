@@ -1,12 +1,12 @@
+import { Dispatch, SetStateAction, createContext, useEffect, useState } from 'react';
 import { CARS_PER_PAGE } from '@/_constants';
 import { Pagination } from '@/components';
 import Modal from '@/components/Modal';
 import { GarageControll, GarageContainer } from '@/components/garage';
 import Winner from '@/components/garage/Winner';
-import { useGarageInit } from '@/components/garage/hooks/useGarageInit';
+import { useGarageInit } from '@/components/garage/hooks';
 import { useGetCarsByPageQuery, useTypedDispatch, useTypedSelector, setGaragePage } from '@/store';
 import { type Car } from '@/types';
-import { Dispatch, SetStateAction, createContext, useEffect, useState } from 'react';
 
 type GarageContextType = {
   selectCar: Dispatch<SetStateAction<Car | undefined>>;
@@ -26,11 +26,11 @@ const Garage = function () {
 
   useEffect(() => {
     onMount();
-  }, [data]);
+  }, [data, onMount]);
 
   const dispatch = useTypedDispatch();
-  const onSetPage = (page: number) => {
-    dispatch(setGaragePage(page));
+  const onSetPage = (_page: number) => {
+    dispatch(setGaragePage(_page));
   };
 
   return (
@@ -41,7 +41,7 @@ const Garage = function () {
             setShowWinner(false);
           }}
         >
-          <Winner {...showWinner} />
+          <Winner name={showWinner.name} time={showWinner.time} />
         </Modal>
       )}
       <h1 className="text-3xl ml-8">Garage ({data?.count ?? '?'})</h1>
@@ -51,6 +51,7 @@ const Garage = function () {
         onStart={onStart}
         onReset={onReset}
       />
+      {/* eslint-disable-next-line */}
       <GarageContext.Provider value={{ selectCar: setSelectedCar }}>
         <GarageContainer cars={renderedData} />
       </GarageContext.Provider>

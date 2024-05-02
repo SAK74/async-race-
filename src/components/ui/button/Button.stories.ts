@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { fn } from '@storybook/test';
-import { Button } from './Button';
+import { fn } from '@storybook/test'; //eslint-disable-line
+import Button from './Button';
 
 const meta = {
   title: 'Button',

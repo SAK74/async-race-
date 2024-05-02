@@ -3,9 +3,9 @@ import { CarLine } from '.';
 import { useGetCarsByPageQuery, useTypedSelector } from '@/store';
 import { Car } from '@/types';
 
-const GarageContainer: FC<{ cars?: (Car & { carRef: RefObject<HTMLDivElement> })[] }> = ({
-  cars,
-}) => {
+const GarageContainer: FC<{ cars?: (Car & { carRef: RefObject<HTMLDivElement> })[] }> = function ({
+  cars = [],
+}) {
   const { page } = useTypedSelector((state) => state.garage);
 
   const { isLoading, isFetching } = useGetCarsByPageQuery({ page }, {});
@@ -23,5 +23,7 @@ const GarageContainer: FC<{ cars?: (Car & { carRef: RefObject<HTMLDivElement> })
     </div>
   );
 };
+
+GarageContainer.defaultProps = { cars: [] };
 
 export default GarageContainer;

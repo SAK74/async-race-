@@ -1,11 +1,11 @@
 import { type FC } from 'react';
-import { Button } from '@/components/ui/button/Button';
+import { Button } from '..';
 
 const Pagination: FC<{
   page?: number;
   pages?: number;
   onSetPage: (page: number) => void;
-}> = ({ page = 1, pages, onSetPage }) => {
+}> = function ({ page = 1, pages, onSetPage }) {
   const isLastPage = page === pages;
 
   const nextPage = () => {

@@ -1,6 +1,6 @@
-import { type Car } from '@/types';
 import { type FC, type FormEventHandler, memo } from 'react';
-import { Button } from '../ui/button/Button';
+import { type Car } from '@/types';
+import { Button } from '../ui';
 
 const CarInput: FC<{
   type: 'create' | 'update';
@@ -40,5 +40,7 @@ const CarInput: FC<{
     </form>
   );
 };
+
+CarInput.defaultProps = { name: undefined, color: undefined };
 
 export default memo(CarInput);

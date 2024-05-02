@@ -1,5 +1,5 @@
-import { Order, SortType } from '@/types';
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { Order, SortType } from '@/types';
 
 const initialState: {
   page: number;
@@ -12,11 +12,11 @@ const winnerSlice = createSlice({
   initialState,
   reducers: {
     setPage: (state, { payload }: PayloadAction<number>) => {
-      state.page = payload;
+      state.page = payload; // eslint-disable-line
     },
     setSort: (state, { payload }: PayloadAction<SortType>) => {
-      state.sort = payload;
-      state.order = state.order === Order.ASC ? Order.DESC : Order.ASC;
+      state.sort = payload; // eslint-disable-line
+      state.order = state.order === Order.ASC ? Order.DESC : Order.ASC; // eslint-disable-line
     },
   },
 });

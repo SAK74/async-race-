@@ -1,24 +1,23 @@
-import cn from '@/utils/cn';
 import type { ComponentProps, FC, PropsWithChildren } from 'react';
+import cn from '@/utils/cn';
 
 type Props = {
-  round?: boolean;
-  variant?: 'start' | 'stop' | 'outline' | 'link';
+  variant?: 'button' | 'start' | 'stop' | 'outline' | 'link';
   active?: boolean;
 };
 
-export const Button: FC<PropsWithChildren<ComponentProps<'button'> & Props>> = ({
+const Button: FC<PropsWithChildren<ComponentProps<'button'> & Props>> = function ({
   children,
   className,
   variant,
   disabled,
   active,
   ...restProps
-}) => {
-  const isRounded = variant == 'start' || variant === 'stop';
+}) {
+  const isRounded = variant === 'start' || variant === 'stop';
   const isActive = variant === 'link' && active;
   const color = isRounded && (variant === 'stop' ? 'bg-red-500' : 'bg-green-600');
-  const _class = cn(
+  const finalClass = cn(
     'rounded-md bg-black text-slate-200 font-medium border border-transparent hover:border-sky-500 px-3 py-1 focus:ring-4 ring-slate-500 ring-2 transition-colors',
     { 'rounded-full p-3': isRounded },
     {
@@ -35,8 +34,13 @@ export const Button: FC<PropsWithChildren<ComponentProps<'button'> & Props>> = (
     className
   );
   return (
-    <button className={_class} {...restProps}>
+    // eslint-disable-next-line
+    <button className={finalClass} {...restProps}>
       {variant !== 'start' && variant !== 'stop' && children}
     </button>
   );
 };
+
+Button.defaultProps = { variant: 'button', active: undefined };
+
+export default Button;
