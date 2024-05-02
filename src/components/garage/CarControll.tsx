@@ -46,22 +46,22 @@ const CarControll: FC<{
   };
   return (
     <div className="grid grid-cols-2 items-center gap-y-2">
-      <Button type="button" onClick={onSelect} className="text-xs p-1 row-start-1">
+      <Button type="button" onClick={onSelect} className="text-xs p-0 row-start-1">
         Select
       </Button>
-      <Button type="button" className="text-xs p-1 col-start-1" onClick={onDelete}>
+      <Button type="button" className="text-xs p-0 col-start-1" onClick={onDelete}>
         Remove
       </Button>
       <Button
         type="button"
         variant="start"
-        className="text-xs p-1 row-start-1 justify-self-center"
+        className="text-xs p-1 row-start-1 justify-self-center size-4"
         onClick={onStart}
       />
       <Button
         type="button"
         variant="stop"
-        className="text-xs p-1 justify-self-center"
+        className="text-xs p-1 justify-self-center size-4"
         onClick={onStop}
       />
     </div>
