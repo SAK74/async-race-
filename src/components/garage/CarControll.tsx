@@ -1,4 +1,4 @@
-import { type FC, type RefObject, useContext, useRef } from 'react';
+import { type FC, type RefObject, useContext, useRef, useEffect } from 'react';
 import { addAnimation, removeAnimation } from '@/services/animations';
 import { GarageContext } from '@/pages/Garage';
 import { useDeleteCarMutation, useDeleteWinnerMutation } from '@/store';
@@ -38,12 +38,17 @@ const CarControll: FC<{
     ctx.selectCar({ ...car, color: hexColor });
   };
 
-  const [deleteCar] = useDeleteCarMutation();
+  const [deleteCar, { isSuccess }] = useDeleteCarMutation();
+
   const [deleteWinner] = useDeleteWinnerMutation();
   const onDelete = () => {
     deleteCar({ id: car.id });
     deleteWinner({ id: car.id });
   };
+  useEffect(() => {
+    ctx?.selectCar(undefined);
+  }, [isSuccess]); //eslint-disable-line
+
   return (
     <div className="grid grid-cols-2 items-center gap-y-2">
       <Button type="button" onClick={onSelect} className="text-xs p-0 row-start-1">

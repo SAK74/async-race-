@@ -1,4 +1,4 @@
-import { useCallback, type Dispatch, type FC, type SetStateAction } from 'react';
+import { useCallback, useEffect, type Dispatch, type FC, type SetStateAction } from 'react';
 import { faker } from '@faker-js/faker';
 import { useCreateCarMutation, useUpdateCarMutation } from '@/store';
 import { CarInput } from '.';
@@ -20,19 +20,20 @@ const GarageControll: FC<{
     [createCar]
   );
 
-  const [updateCar, { isSuccess }] = useUpdateCarMutation();
+  const [updateCar, { isSuccess, data }] = useUpdateCarMutation();
   const onUpdate = useCallback(
     (car: Omit<Car, 'id'>) => {
       if (!selectedCar || (selectedCar.name === car.name && selectedCar.color === car.color)) {
         return;
       }
       updateCar({ ...car, id: selectedCar.id });
-      if (isSuccess) {
-        selectCar(undefined);
-      }
     },
-    [isSuccess, selectCar, selectedCar, updateCar]
+    [selectedCar, updateCar]
   );
+
+  useEffect(() => {
+    selectCar(data);
+  }, [isSuccess, data, selectCar]);
 
   const onGenerate = useCallback(() => {
     for (let i = 0; i < AMOUNT_OF_CARS_GENERATING; i += 1) {
