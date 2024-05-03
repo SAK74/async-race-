@@ -10,6 +10,7 @@ import { type Car } from '@/types';
 
 type GarageContextType = {
   selectCar: Dispatch<SetStateAction<Car | undefined>>;
+  isRace: boolean;
 } | null;
 
 export const GarageContext = createContext<GarageContextType>(null);
@@ -21,7 +22,7 @@ const Garage = function () {
 
   const [selectedCar, setSelectedCar] = useState<Car | undefined>(undefined);
 
-  const { onMount, renderedData, showWinner, setShowWinner, onStart, onReset } =
+  const { onMount, renderedData, showWinner, setShowWinner, onStart, onReset, isRace } =
     useGarageInit(data);
 
   useEffect(() => {
@@ -45,14 +46,14 @@ const Garage = function () {
         </Modal>
       )}
       <h1 className="text-3xl ml-8">Garage ({data?.count ?? '?'})</h1>
-      <GarageControll
-        selectedCar={selectedCar}
-        selectCar={setSelectedCar}
-        onStart={onStart}
-        onReset={onReset}
-      />
       {/* eslint-disable-next-line */}
-      <GarageContext.Provider value={{ selectCar: setSelectedCar }}>
+      <GarageContext.Provider value={{ selectCar: setSelectedCar, isRace }}>
+        <GarageControll
+          selectedCar={selectedCar}
+          selectCar={setSelectedCar}
+          onStart={onStart}
+          onReset={onReset}
+        />
         <GarageContainer cars={renderedData} />
       </GarageContext.Provider>
       <Pagination page={page} pages={pages} onSetPage={onSetPage} />

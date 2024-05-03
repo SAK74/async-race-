@@ -1,10 +1,18 @@
-import { useCallback, useEffect, type Dispatch, type FC, type SetStateAction } from 'react';
+import {
+  useCallback,
+  useContext,
+  useEffect,
+  type Dispatch,
+  type FC,
+  type SetStateAction,
+} from 'react';
 import { faker } from '@faker-js/faker';
 import { useCreateCarMutation, useUpdateCarMutation } from '@/store';
 import { CarInput } from '.';
 import { type Car } from '@/types';
 import { AMOUNT_OF_CARS_GENERATING } from '@/_constants';
 import { Button } from '../ui';
+import { GarageContext } from '@/pages/Garage';
 
 const GarageControll: FC<{
   selectedCar?: Car;
@@ -41,12 +49,14 @@ const GarageControll: FC<{
     }
   }, [createCar]);
 
+  const ctx = useContext(GarageContext);
+
   return (
     <div className="flex flex-wrap justify-around">
-      <Button type="button" onClick={onStart}>
+      <Button type="button" onClick={onStart} disabled={ctx?.isRace}>
         Race
       </Button>
-      <Button type="button" onClick={onReset}>
+      <Button type="button" onClick={onReset} disabled={!ctx?.isRace}>
         Reset
       </Button>
       <CarInput type="create" onSubmit={onCreate} />

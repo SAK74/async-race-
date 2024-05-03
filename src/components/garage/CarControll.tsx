@@ -1,4 +1,4 @@
-import { type FC, type RefObject, useContext, useRef, useEffect } from 'react';
+import { type FC, type RefObject, useContext, useEffect, useState } from 'react';
 import { addAnimation, removeAnimation } from '@/services/animations';
 import { GarageContext } from '@/pages/Garage';
 import { useDeleteCarMutation, useDeleteWinnerMutation } from '@/store';
@@ -13,21 +13,22 @@ const CarControll: FC<{
 }> = function ({ car, carRef, id }) {
   const ctx = useContext(GarageContext);
 
-  const animationRef = useRef<Animation | null>(null);
+  const [animation, setAnimation] = useState<Animation | null>(null);
 
   const onStart = async () => {
     if (!carRef.current) {
       return;
     }
-    animationRef.current = await addAnimation(carRef.current, id.toString());
+    setAnimation(await addAnimation(carRef.current, id.toString()));
   };
 
   const onStop = async () => {
-    if (!animationRef.current || !carRef.current) {
+    if (!animation || !carRef.current) {
       return;
     }
-    animationRef.current.pause();
+    animation.pause();
     await removeAnimation(carRef.current, id);
+    setAnimation(null);
   };
 
   const onSelect = () => {
@@ -62,12 +63,14 @@ const CarControll: FC<{
         variant="start"
         className="text-xs p-1 row-start-1 justify-self-center size-4"
         onClick={onStart}
+        disabled={!!animation || ctx?.isRace}
       />
       <Button
         type="button"
         variant="stop"
         className="text-xs p-1 justify-self-center size-4"
         onClick={onStop}
+        disabled={!animation}
       />
     </div>
   );

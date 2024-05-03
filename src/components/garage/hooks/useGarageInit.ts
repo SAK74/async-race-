@@ -7,6 +7,7 @@ import { startRace } from '@/services/engineApi';
 
 const useGarageInit = (data?: QueryResponse<Car>) => {
   const carRefs = useRef<{ [id: number]: HTMLDivElement }>({});
+  const [isRace, setIsRace] = useState(false);
 
   const renderedData = useMemo(
     () =>
@@ -46,6 +47,7 @@ const useGarageInit = (data?: QueryResponse<Car>) => {
         addBlobAnimation(carRefs.current[Number(animation.id)].lastElementChild);
       }
     });
+    setIsRace(true);
 
     const { currentTime, id } = await Promise.any(
       animations.map(async (anim) => (await anim).finished)
@@ -71,6 +73,7 @@ const useGarageInit = (data?: QueryResponse<Car>) => {
         animation.cancel();
       });
     });
+    setIsRace(false);
   };
 
   return {
@@ -80,6 +83,7 @@ const useGarageInit = (data?: QueryResponse<Car>) => {
     showWinner,
     setShowWinner,
     onStart,
+    isRace,
   };
 };
 export default useGarageInit;
