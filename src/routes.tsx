@@ -15,7 +15,6 @@ const routes: RouteObject[] = [
       {
         path: '/winners',
         element: <Winners />,
-        index: true,
       },
     ],
   },

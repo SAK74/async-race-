@@ -30,5 +30,5 @@ export {
   useUpdateCarMutation,
   useUpdateWinnerMutation,
 } from './apiSlice';
-export { setGaragePage } from './garageSlice';
+export { setGaragePage, switchSound } from './garageSlice';
 export { setWinnerPage, setWinnersSort } from './winnersSlice';
