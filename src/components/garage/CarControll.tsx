@@ -61,14 +61,14 @@ const CarControll: FC<{
       <Button
         type="button"
         variant="start"
-        className="text-xs p-1 row-start-1 justify-self-center size-4"
+        className="text-xs p-1 sm:p-1 row-start-1 justify-self-center size-4"
         onClick={onStart}
         disabled={!!animation || ctx?.isRace}
       />
       <Button
         type="button"
         variant="stop"
-        className="text-xs p-1 justify-self-center size-4"
+        className="text-xs p-1 sm:p-1 justify-self-center size-4"
         onClick={onStop}
         disabled={!animation}
       />

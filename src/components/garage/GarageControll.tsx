@@ -52,7 +52,7 @@ const GarageControll: FC<{
   const ctx = useContext(GarageContext);
 
   return (
-    <div className="flex flex-wrap justify-around">
+    <div className="flex flex-wrap justify-around gap-y-2">
       <Button type="button" onClick={onStart} disabled={ctx?.isRace}>
         Race
       </Button>

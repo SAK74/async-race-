@@ -12,12 +12,12 @@ const Track: FC<
 
   return (
     <div className={finalClass}>
-      <CarIcon fill={color} className="absolute w-28 bottom-1 skew-x-12" ref={carRef} />
+      <CarIcon fill={color} className="absolute w-20 sm:w-28 bottom-1 skew-x-12" ref={carRef} />
 
-      <span className="tracking-widest text-gray-400 ml-32 border-l-4 border-dashed pl-4">
+      <span className="tracking-widest text-gray-400 ml-24 sm:ml-32 border-l-4 border-dashed pl-4">
         {name}
       </span>
-      <div className="absolute right-28 bottom-0 text-2xl">🏁</div>
+      <div className="absolute right-20 sm:right-28 bottom-0 text-2xl">🏁</div>
     </div>
   );
 };

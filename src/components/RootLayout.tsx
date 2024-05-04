@@ -7,7 +7,7 @@ const RootLayout: FC = function () {
   return (
     <>
       <Header>
-        <div className="flex gap-4">
+        <div className="flex sm:gap-4">
           <nav className="w-min md:w-max">
             <NavLink to="/">
               {({ isActive }) => (
