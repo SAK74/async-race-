@@ -1,6 +1,14 @@
-import { type FC, type FormEventHandler, memo } from 'react';
+import {
+  type FC,
+  type FormEventHandler,
+  memo,
+  useState,
+  ChangeEventHandler,
+  useEffect,
+} from 'react';
 import { type Car } from '@/types';
 import { Button } from '../ui';
+import CarIcon from '@/assets/car.svg?react';
 
 const CarInput: FC<{
   type: 'create' | 'update';
@@ -21,6 +29,16 @@ const CarInput: FC<{
     onSubmit({ name: carName as string, color: carColor as string });
     form.reset();
   };
+
+  const [carColor, setCarColor] = useState(() => color);
+  useEffect(() => {
+    setCarColor(color);
+  }, [color]);
+
+  const onChange: ChangeEventHandler<HTMLInputElement> = ({ target: { value } }) => {
+    setCarColor(value);
+  };
+
   return (
     <form className="flex items-center gap-1" onSubmit={handleSubmit}>
       <input
@@ -30,13 +48,21 @@ const CarInput: FC<{
         defaultValue={name}
         className="text-neutral-800"
       />
-      <input
-        type="color"
-        name="car-color"
-        defaultValue={color ?? '#000000'}
-        className="w-6 cursor-pointer rounded-sm"
-      />
-      <Button type="submit">{type === 'create' ? 'Create car' : 'Update car'}</Button>
+      {/* eslint-disable-next-line */}
+      <label className="relative">
+        <input
+          type="color"
+          name="car-color"
+          defaultValue={color ?? '#000000'}
+          className="absolute top-0 left-0 invisible"
+          onChange={onChange}
+        />
+        <CarIcon fill={carColor} className="w-20 cursor-pointer" />
+      </label>
+
+      <Button type="submit" className="ml-2">
+        {type === 'create' ? 'Create car' : 'Update car'}
+      </Button>
     </form>
   );
 };

@@ -1,4 +1,4 @@
-import { type FC } from 'react';
+import { memo, type FC } from 'react';
 import { Button } from '..';
 
 const Pagination: FC<{
@@ -52,4 +52,4 @@ const Pagination: FC<{
 
 Pagination.defaultProps = { page: 1, pages: undefined };
 
-export default Pagination;
+export default memo(Pagination);

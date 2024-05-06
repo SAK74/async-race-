@@ -1,4 +1,11 @@
-import { Dispatch, SetStateAction, createContext, useEffect, useState } from 'react';
+import {
+  type Dispatch,
+  type SetStateAction,
+  createContext,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import { CARS_PER_PAGE } from '@/_constants';
 import { Pagination } from '@/components';
 import Modal from '@/components/Modal';
@@ -30,9 +37,12 @@ const Garage = function () {
   }, [data, onMount]);
 
   const dispatch = useTypedDispatch();
-  const onSetPage = (_page: number) => {
-    dispatch(setGaragePage(_page));
-  };
+  const onSetPage = useCallback(
+    (_page: number) => {
+      dispatch(setGaragePage(_page));
+    },
+    [dispatch]
+  );
 
   return (
     <main className="flex flex-col gap-4">

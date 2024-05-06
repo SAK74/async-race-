@@ -25,5 +25,6 @@ module.exports = defineConfig({
     'import/no-cycle': 'off',
     'import/extensions': 'off',
     'func-names': ['warn', 'as-needed'],
+    'jsx-a11y/label-has-associated-control': ['error', { assert: 'either' }],
   },
 });
