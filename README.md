@@ -1,4 +1,5 @@
 ## Hi!
+<img src="src/assets/car.svg" align="right" />  
 
 ## With pleasure present this project "Async Race".
 
