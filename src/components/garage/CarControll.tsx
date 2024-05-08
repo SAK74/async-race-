@@ -63,7 +63,7 @@ const CarControll: FC<{
         variant="start"
         className="text-xs p-1 sm:p-1 row-start-1 justify-self-center size-4"
         onClick={onStart}
-        disabled={!!animation || ctx?.isRace}
+        disabled={!!animation || ctx?.isRace !== 'iddle'}
       />
       <Button
         type="button"

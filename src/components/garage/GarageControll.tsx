@@ -53,10 +53,10 @@ const GarageControll: FC<{
 
   return (
     <div className="flex flex-wrap justify-around gap-y-2">
-      <Button type="button" onClick={onStart} disabled={ctx?.isRace}>
+      <Button type="button" onClick={onStart} disabled={ctx?.isRace !== 'iddle'}>
         Race
       </Button>
-      <Button type="button" onClick={onReset} disabled={!ctx?.isRace}>
+      <Button type="button" onClick={onReset} disabled={ctx?.isRace !== 'finished'}>
         Reset
       </Button>
       <CarInput type="create" onSubmit={onCreate} />

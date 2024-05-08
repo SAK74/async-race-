@@ -5,9 +5,11 @@ import { useAddwinner } from '.';
 import { addAnimation, addBlobAnimation } from '@/services/animations';
 import { startRace } from '@/services/engineApi';
 
+export type RaceState = 'iddle' | 'raced' | 'finished';
+
 const useGarageInit = (data?: QueryResponse<Car>) => {
   const carRefs = useRef<{ [id: number]: HTMLDivElement }>({});
-  const [isRace, setIsRace] = useState(false);
+  const [isRace, setIsRace] = useState<RaceState>('iddle');
 
   const renderedData = useMemo(
     () =>
@@ -36,18 +38,23 @@ const useGarageInit = (data?: QueryResponse<Car>) => {
   const addWinner = useAddwinner();
 
   const onStart = async () => {
+    setIsRace('raced');
     const cars = Object.entries(carRefs.current);
     const animations = cars.map(([id, carElement]) => addAnimation(carElement, id));
-    animations.forEach(async (animPromise) => {
-      const animation = await animPromise;
-      try {
-        await startRace(Number(animation.id));
-      } catch {
-        animation.pause();
-        addBlobAnimation(carRefs.current[Number(animation.id)].lastElementChild);
-      }
+
+    Promise.allSettled(
+      animations.map(async (animPromise) => {
+        const animation = await animPromise;
+        try {
+          await startRace(Number(animation.id));
+        } catch {
+          animation.pause();
+          addBlobAnimation(carRefs.current[Number(animation.id)].lastElementChild);
+        }
+      })
+    ).then(() => {
+      setIsRace('finished');
     });
-    setIsRace(true);
 
     const { currentTime, id } = await Promise.any(
       animations.map(async (anim) => (await anim).finished)
@@ -73,7 +80,7 @@ const useGarageInit = (data?: QueryResponse<Car>) => {
         animation.cancel();
       });
     });
-    setIsRace(false);
+    setIsRace('iddle');
   };
 
   return {

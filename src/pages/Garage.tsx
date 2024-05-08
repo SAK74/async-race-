@@ -14,10 +14,11 @@ import Winner from '@/components/garage/Winner';
 import { useGarageInit } from '@/components/garage/hooks';
 import { useGetCarsByPageQuery, useTypedDispatch, useTypedSelector, setGaragePage } from '@/store';
 import { type Car } from '@/types';
+import { RaceState } from '@/components/garage/hooks/useGarageInit';
 
 type GarageContextType = {
   selectCar: Dispatch<SetStateAction<Car | undefined>>;
-  isRace: boolean;
+  isRace: RaceState;
 } | null;
 
 export const GarageContext = createContext<GarageContextType>(null);
