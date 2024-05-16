@@ -1,5 +1,6 @@
 ## Hi!
-<img src="src/assets/car.svg" align="right" />  
+
+<img src="src/assets/car.svg" align="right" />
 
 ## With pleasure present this project "Async Race".
 
@@ -15,7 +16,7 @@
 
 ### You can find deployed version [here](https://async-race-delta.vercel.app/)!
 
-#### Backend edition doesn't work correct in the deployment (jsonServer based), so you should launch it locally from [this repo](https://github.com/mikhama/async-race-api).
+### [**_Backend repo_**](https://github.com/SAK74/async-race-backend-express)
 
 #### Followwing checklist shows features implemented in project.
 
