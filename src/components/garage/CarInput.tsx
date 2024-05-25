@@ -8,7 +8,7 @@ import {
 } from 'react';
 import { type Car } from '@/types';
 import { Button } from '../ui';
-import CarIcon from '@/assets/car.svg?react';
+import { CarIcon } from '..';
 
 const CarInput: FC<{
   type: 'create' | 'update';

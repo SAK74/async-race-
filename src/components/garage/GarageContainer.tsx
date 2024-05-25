@@ -13,7 +13,12 @@ const GarageContainer: FC<{ cars?: (Car & { carRef: RefObject<HTMLDivElement> })
   return (
     <div className="flex flex-col">
       <hr className="" />
-      {(isLoading || isFetching) && <div className="text-center py-8">........Loading...</div>}
+      {(isLoading || isFetching) && (
+        <>
+          <div className="text-center pt-8 pb-2">...Wait a moment...</div>
+          <div className="w-full h-6 bg-contain bg-car bg-no-repeat animate-race drop-shadow-[-15px_0_5px_rgba(0,0,0,.5)] bg-left" />
+        </>
+      )}
 
       {cars &&
         cars.map(({ id, name, color, carRef }) => (

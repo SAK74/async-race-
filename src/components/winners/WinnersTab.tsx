@@ -1,9 +1,9 @@
 import type { FC } from 'react';
 import { Order, type Winner } from '@/types';
 import WinnerRow from './WinnerRow';
-import CarIcon from '@/assets/car.svg?react';
 import { setWinnersSort, useTypedDispatch, useTypedSelector } from '@/store';
 import cn from '@/utils/cn';
+import { CarIcon } from '..';
 
 const WinnersTab: FC<{ winners: Winner[] }> = function ({ winners }) {
   const { sort, order } = useTypedSelector((state) => state.winners);
