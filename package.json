@@ -12,8 +12,8 @@
     "ci:format": "prettier --check src",
     "format": "prettier --write src",
     "storybook": "storybook dev -p 6006 --no-open",
-    "deploy": "vercel",
-    "predeploy": "npm run lint & npm run ci:format"
+    "deploy": "vercel deploy --prod",
+    "prebuild": "npm run lint & npm run ci:format"
   },
   "dependencies": {
     "@faker-js/faker": "^8.4.1",

@@ -11,7 +11,7 @@ import {
 
 const Winners: FC = function () {
   const { page, order, sort } = useTypedSelector((state) => state.winners);
-  const { data } = useGetWinnersByPageQuery({ _page: page, _order: order, _sort: sort });
+  const { data, isLoading } = useGetWinnersByPageQuery({ _page: page, _order: order, _sort: sort });
   const dispatch = useTypedDispatch();
   const onSetPage = (_page: number) => {
     dispatch(setWinnerPage(_page));
@@ -20,6 +20,12 @@ const Winners: FC = function () {
   return (
     <main className="flex flex-col">
       <h1 className="text-3xl ml-8">Winners ({data?.count ?? '?'})</h1>
+      {isLoading && (
+        <>
+          <div className="text-center pt-8 pb-2">...Wait a moment...</div>
+          <div className="w-full h-6 bg-contain bg-car bg-no-repeat animate-race drop-shadow-[-15px_0_5px_rgba(0,0,0,.5)] bg-left"></div>
+        </>
+      )}
       {data && <WinnersTab winners={data.data} />}
       <Pagination
         page={page}
