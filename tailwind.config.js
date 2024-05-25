@@ -11,7 +11,7 @@ export default {
         race: 'race 2s linear infinite',
       },
       backgroundImage: {
-        car: "url('./src/assets/car.svg')",
+        car: "url('/car.svg')",
       },
     },
     keyframes: {

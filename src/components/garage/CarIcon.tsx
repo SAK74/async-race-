@@ -1,6 +1,6 @@
 import { forwardRef, ForwardRefRenderFunction, SVGProps, memo } from 'react';
-import CarIcon from '@/assets/car.svg?react';
 import BlobIcon from '@/assets/blob.svg?react';
+import { CarIcon } from '..';
 
 export const CarElement: ForwardRefRenderFunction<
   HTMLDivElement,

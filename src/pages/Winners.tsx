@@ -23,7 +23,7 @@ const Winners: FC = function () {
       {isLoading && (
         <>
           <div className="text-center pt-8 pb-2">...Wait a moment...</div>
-          <div className="w-full h-6 bg-contain bg-car bg-no-repeat animate-race drop-shadow-[-15px_0_5px_rgba(0,0,0,.5)] bg-left"></div>
+          <div className="w-full h-6 bg-contain bg-car bg-no-repeat animate-race drop-shadow-[-15px_0_5px_rgba(0,0,0,.5)] bg-left" />
         </>
       )}
       {data && <WinnersTab winners={data.data} />}
